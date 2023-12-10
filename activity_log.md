@@ -159,7 +159,11 @@ This challenge can be driven autonomously or by remote control. The points avail
 
 I can imagine some vision system based on a top mounted camera, then a routine that turns the robot until the light is in front of the robot, then moves towards it, stops when it is on top of it, then waits 1", then repeats when a .
 
-Mocking somewhere to test to fine tune (field of view, detecting light, when to stop etc) may be difficult though. I think we may compete here with remote control. 
+Mocking somewhere to test to fine tune (field of view, detecting light, when to stop etc) may be difficult though. I think we may compete here with remote control.
+
+11/12 - check out this very nice blog:https://eastdevonpirates.blogspot.com/2023/12/minesweeper-piwars-2024.html with a discussion.
+
+Found 30cm 130 degree convex mirrors in Amazon for 30€. Made some calculations and with a picamera (75degrees angle of view) placed at 10cm from the floor looking upwards, the convex mirror placed 20cm above the camera facing downwards I could monitor a circle 154cm in diameter. But the mirror weighs 1kg...
 
 ## [The Zombie Apocalypse](https://piwars.org/2024-disaster-zone/challenges/zombies/) - Shoot the undead!
 
@@ -174,6 +178,8 @@ However, as there uncertainty about the exact distance and the geometry of the t
 ### Our thoughts
 
 Today (19/10) I bought a [laser pointer]() and a [Nerf](). I am thinking about attaching the nerf and adding some servos to aim up and down, pull the trigger of the Nerf and reload it. Also I could imagine some way of auto aiming by detecting the laser with a camera, but I don't really know how to choose the target automatically.
+
+11/12 - check out new information released in the discord and the official website with details of the arena and the design of the zombies
 
 ## [Pi Noon - The Hindenburg Disaster](https://piwars.org/2024-disaster-zone/challenges/pi-noon/) - Defend your balloon from an explosive end!
 
@@ -192,14 +198,19 @@ Not a lot of information, we just know that the course contains "several fiendis
 
 All obstacles **must** be *attempted* first, then we may skip them (but no points for skipped obstacles). We have up to **three attemps** at the challenge within the 5' time limit.
 
+### Ideas to improve grip
+
+* Add weight
+* moving the CoG above the wheel axis (away from the caster)
+* Add rubber additive / liquid latex?
+
 # Opportunities for more points
 
 - [**Blogging Challenge**](https://piwars.org/2024-disaster-zone/challenges/blogging/) – Describe our **pre-event** exploits in words, videos and/or photographs. [See some hints here](https://piwars.org/blogging-challenge-guidelines/). Up to 1400 points per robot.
 - [**Technical & Artistic Merit**](https://piwars.org/2024-disaster-zone/challenges/technical-and-artistic-merit/) – **record a video up to 5' in length** and **submit it ahead of the competition** to document the robot's Technical Merit (features, build quality and other technical aspects) and the design and artistic features (Artistic Merit). Videos will be scored by expert judges ahead of the competition. Up to 2800 points per robot.
 - **Most Disastrous Robot Special Award** – to the robot that has the design most influenced by the Disaster theme (natural, man-made, movie-style disasters, or a combination, responses to disaster such as rescue vehicles etc. Up to 700 points per robot.
 
-# Ideas to improve grip
+## Resources
 
-* Add weight
-* moving the CoG above the wheel axis (away from the caster)
-* Add rubber additive / liquid latex?
+* Cool Piwars blogroll: https://philipmcgaw.com/piwars-blogroll/
+
