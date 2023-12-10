@@ -11,7 +11,8 @@
 | 1    | Structure                                       | ![](./BOM/assets/structure.jpg)               | CNCMANS 4 x 300mm EU2020-T anodized aluminium profiles with angle brackets and 50 M5 nuts | [Amazon](https://www.amazon.es/dp/B0BX648N6P)                | 22.00€ (1kit)    |
 | 2    | Motor and wheel kit                             | ![](./BOM/assets/motor_encoder_wheel_kit.jpg) | 12V motor encoder and wheel kit (130rpm)                     | [Amazon](https://www.amazon.es/dp/B07WT22RNK)                | 23.92€           |
 | 1    | USB flat cable 100mm                            | ![](./BOM/assets/usb_cable.jpg)               | Straight USB (AMST) to straight Mini USB (V3ST)              | [Aliexpress](https://es.aliexpress.com/item/1005002551406991.html?spm=a2g0n.order_detail.order_detail_item.3.578739d32xzMxK&gatewayAdapt=glo2esp) | 6,91€(2 units)   |
-| 1    | Raspberry Pi 5                                  |                                               |                                                              |                                                              |                  |
+| 1    | Raspberry Pi 4B 4Mb                             |                                               | Raspberry Pi 4B 4Mb                                          |                                                              |                  |
+| 1    | [OLED](./BOM/OLED.md)                           | ![](./BOM/assets/OLED.jpg)                    | SSD1306 0.96" OLED display                                   | [Amazon](https://www.amazon.es/dp/B09GVTRB2W)                | 10.99€ (3 units) |
 
 ## 3D printed parts
 
@@ -34,3 +35,23 @@ https://grabcad.com/library/buck-converter-lm2596-1
 Simon robot: https://github.com/simonllopez/mini_robot_hw 
 
 ( see https://esimonsite.com/proyectos/mini_robot/)
+
+### Base plate 
+
+#### Version 2 printed 10/12/23
+
+![](./BOM/assets/base_plate_v2.png)
+
+3D printing took 12h 8' in low quality, 140g after scaling in z to 75% to reduce to 3mm thickness.
+
+Lessons learned: 
+
+* 3mm thickness is enough. Perhaps 4mm is good only where the fixing screws attach the plate to the frame
+* 4 screws are enough to fix the plate. Ideally use 10mm M5 screws with phillips or internal hex head and one washer 
+* Make open slots instead of holes for ease of installation. 5mm holes are too tight in practice, try 5.2mm
+* make raised flanges in the corners of the plate to facilitate aligning the plate to the frame
+
+Next steps: 
+
+* position elements in the plate and holes to fix them.
+* make modifications to FreeCAD model
