@@ -1,5 +1,9 @@
 # Sipeed MaixSense A010 
 
+## Downloads (specs, CAD, SDK, dwgs)
+
+https://dl.sipeed.com/shareURL/MaixSense/MaixSense_A010
+
 ## Official Wiki
 
 https://wiki.sipeed.com/hardware/en/maixsense/maixsense-a010/maixsense-a010.html
@@ -30,4 +34,6 @@ https://dl.sipeed.com/shareURL/MaixSense/MaixSense_A010
 comtool repo: https://github.com/sipeed/MetaSense-ComTool
 
 Installation:
+
+Check out @JRBowling twitter thread from 24/11/23 onwards fighting with the SDK
 
