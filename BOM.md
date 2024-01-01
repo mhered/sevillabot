@@ -13,6 +13,7 @@
 | 1    | USB flat cable 100mm                            | ![](./BOM/assets/usb_cable.jpg)               | Straight USB (AMST) to straight Mini USB (V3ST)              | [Aliexpress](https://es.aliexpress.com/item/1005002551406991.html?spm=a2g0n.order_detail.order_detail_item.3.578739d32xzMxK&gatewayAdapt=glo2esp) | 6,91€(2 units)   |
 | 1    | Raspberry Pi 4B 4Mb                             |                                               | Raspberry Pi 4B 4Mb                                          |                                                              |                  |
 | 1    | [OLED](./BOM/OLED.md)                           | ![](./BOM/assets/OLED.jpg)                    | SSD1306 0.96" OLED display                                   | [Amazon](https://www.amazon.es/dp/B09GVTRB2W)                | 10.99€ (3 units) |
+| 2    | Stepper motors                                  | ![](./BOM/assets/stepper.png)                 | 28BYJ-48 12V stepper motor with ULN2003A based driver board  | local shop                                                   | 6,75€ (2 units)  |
 
 ## 3D printed parts
 
