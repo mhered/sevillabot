@@ -119,6 +119,8 @@ This challenge is autonomous-only: the Raspberry Pi will control the robot by it
 
 This will require a line-following algorithm. I think there are specific line-detection sensors, otherwise I could use a camera. Potentially I could use a Lidar to stay away from the walls.
 
+4/1 We bought a line sensor, built a support and tested the sensor on a black line over white background. It was not very robust, perhaps related to calibration with direct light and shadows? We need to modify the code to detect a white line over black background. Also, need to add a PID, but I need a working robot base to calibrate the gains and test it!
+
 ## [Eco-Disaster](https://piwars.org/2024-disaster-zone/challenges/eco-disaster/)- Sort the barrels of toxic waste!
 
 ### Challenge description
@@ -126,6 +128,8 @@ This will require a line-following algorithm. I think there are specific line-de
 This challenge can be driven autonomously *or* by remote control. The points available are weighted so autonomous robots can earn more points.
 
 ### Our thoughts
+
+1/1 Finished the first working prototype of a beautiful clamp actuated by a stepper motor. Need to have a working base robot to be able to test it.
 
 ## [Escape Route](https://piwars.org/2024-disaster-zone/challenges/escape-route/) - Navigate the blind maze to find your way out!
 
@@ -181,9 +185,20 @@ Today (19/10) I bought a [laser pointer]() and a [Nerf](). I am thinking about a
 
 11/12 - check out new information released in the discord and the official website with details of the arena and the design of the zombies
 
+24/1 We made a beautiful prototype gun that emplys 3D printed structural parts, a car door lock actuator to pull the trigger and a stepper motor to aim the gun in pitch. In order to increase precision and reduce torque, we used a pulley system with a small gear and a large gear.
+
+Observations from the first test of the prototype in a mock-up arena for the zombie challenge:
+
+* The completed gun assembly fits within 400mm long x 200mm wide x 200 mm high box, which should be ok.
+* We need to balance the gun: the axes is too far towards the rear. Since there is not much room to move the axis backwards, this can be compensated instead adding weight at the front of the gun (two tape rolls on top of the laser pointer made the trick). Without this, the stepper motor does not really have enough torque to lower the gun and aim lower
+* There is not enough clearance between the trigger mechanism and the supports or the robot base for the pitch angle range to reach the higher positions at the top of the 60cm high target area, specially from the closest 1m distance. We need to redesign the supports to make them at least 40mm higher and give them more angle so the attachment of the supports to the robot moves forward at least 30mm. This may cause FreeCAD to break....  
+* The pulley system does not appear robust. At times it seems to hesitate or skip teeth, perhaps the stepper is lacking torque and/or the belt is not tight enough. Although applying the stepper directly to the axis may provide sufficient precision, this requires more torque... maybe try the NEMA stepper without the pulley system?
+
 ## [Pi Noon - The Hindenburg Disaster](https://piwars.org/2024-disaster-zone/challenges/pi-noon/) - Defend your balloon from an explosive end!
 
 One (or more) members of the team will control the robot via wireless controller(s). This challenge *could* be tackled autonomously for the laughs, without extra points.
+
+24/1 still waiting for the block
 
 ## [The Temple of Doom](https://piwars.org/2024-disaster-zone/challenges/temple-of-doom/) - Go on an adventure and tackle the obstacles in your way!
 
@@ -198,9 +213,9 @@ Not a lot of information, we just know that the course contains "several fiendis
 
 All obstacles **must** be *attempted* first, then we may skip them (but no points for skipped obstacles). We have up to **three attemps** at the challenge within the 5' time limit.
 
-### Ideas to improve grip
+### Ideas to improve wheel grip
 
-* Add weight
+* Add weight to the robot
 * moving the CoG above the wheel axis (away from the caster)
 * Add rubber additive / liquid latex?
 
