@@ -121,6 +121,8 @@ This will require a line-following algorithm. I think there are specific line-de
 
 4/1 We bought a line sensor, built a support and tested the sensor on a black line over white background. It was not very robust, perhaps related to calibration with direct light and shadows? We need to modify the code to detect a white line over black background. Also, need to add a PID, but I need a working robot base to calibrate the gains and test it!
 
+1/2 checking dimensions to mock-up the arena for testing: 7m long course, 570mm long by 53mm high speed bump, section is channel 550mm wide with 70mm high walls (even in speed bump), painted black with 19mm wide white centre line. There are 2 turns, looking at the sketch the turns are approx 780mm long at 45 degrees. Robot must cross finish line. Need start/stop button. Retrieve manually from end of course. 3 runs. Apparently in the documentation: https://www.pololu.com/docs/0J18/17 there is a `read_line_white()` function.
+
 ## [Eco-Disaster](https://piwars.org/2024-disaster-zone/challenges/eco-disaster/)- Sort the barrels of toxic waste!
 
 ### Challenge description
@@ -185,20 +187,32 @@ Today (19/10) I bought a [laser pointer]() and a [Nerf](). I am thinking about a
 
 11/12 - check out new information released in the discord and the official website with details of the arena and the design of the zombies
 
-24/1 We made a beautiful prototype gun that emplys 3D printed structural parts, a car door lock actuator to pull the trigger and a stepper motor to aim the gun in pitch. In order to increase precision and reduce torque, we used a pulley system with a small gear and a large gear.
+24/1 We made a beautiful prototype gun that employs 3D printed structural parts, a car door lock actuator to pull the trigger and a stepper motor to aim the gun in pitch. In order to increase precision and reduce torque, we used a pulley system with a small gear and a large gear.
 
 Observations from the first test of the prototype in a mock-up arena for the zombie challenge:
 
 * The completed gun assembly fits within 400mm long x 200mm wide x 200 mm high box, which should be ok.
-* We need to balance the gun: the axes is too far towards the rear. Since there is not much room to move the axis backwards, this can be compensated instead adding weight at the front of the gun (two tape rolls on top of the laser pointer made the trick). Without this, the stepper motor does not really have enough torque to lower the gun and aim lower
+* We need to balance the gun: the axle is too far forward. Since there is not much room to move the axis backwards, this can be compensated instead adding weight at the front of the gun (two tape rolls on top of the laser pointer made the trick). Without this, the stepper motor does not really have enough torque to lower the gun and aim lower
 * There is not enough clearance between the trigger mechanism and the supports or the robot base for the pitch angle range to reach the higher positions at the top of the 60cm high target area, specially from the closest 1m distance. We need to redesign the supports to make them at least 40mm higher and give them more angle so the attachment of the supports to the robot moves forward at least 30mm. This may cause FreeCAD to break....  
 * The pulley system does not appear robust. At times it seems to hesitate or skip teeth, perhaps the stepper is lacking torque and/or the belt is not tight enough. Although applying the stepper directly to the axis may provide sufficient precision, this requires more torque... maybe try the NEMA stepper without the pulley system?
+
+28/1 - Progress:
+
+* Realised it may be sufficient to move supports apart so they don't clash with the trigger mechanism.
+* Modified supports: 30 mm higher, replaced clamp with clip-on system to secure bearing in place. Issue: Pending testing, RH support seems flimsy and may require reinforcement.
+* Modified 3D printed parts `gun_holder` to move axle backwards, `trigger_support` to clear the battery compartment, plus made RH and LH to make assembly narrower
+* Realised jammings can be solved from the cartridge compartment, no need to access the other door
+* Installed all elements temporarily on the robot base (battery, fuse, power rail, arduino, motor driver, relay, door lock actuator) 
+* Implemented basic keyboard control to aim the gun, toggle the laser and to fire the trigger.  Keyboard control works with python script `command_gun.py` running in the computer. Issues: `keyboard` library requires `sudo`, need to manually set in the code the port in which Arduino is connected. One keyboard press some times fires several shots in quick succession. 
+* Tested NEMA17 motor with L298N driver and arduino. May not have enough resolution: 200 steps means 1.8 degrees resolution means 47mm steps at 1.5m! 
 
 ## [Pi Noon - The Hindenburg Disaster](https://piwars.org/2024-disaster-zone/challenges/pi-noon/) - Defend your balloon from an explosive end!
 
 One (or more) members of the team will control the robot via wireless controller(s). This challenge *could* be tackled autonomously for the laughs, without extra points.
 
 24/1 still waiting for the block
+
+29/1 Delivery failed because 5€ worth of taxes were due... Will need to pick it up from the post office.
 
 ## [The Temple of Doom](https://piwars.org/2024-disaster-zone/challenges/temple-of-doom/) - Go on an adventure and tackle the obstacles in your way!
 

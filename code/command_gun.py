@@ -12,7 +12,7 @@ except serial.SerialException as e:
     print(f"Error: {e}")
     sys.exit(1)
 
-print('Press Q to aim higher, A to aim lower, SPACE to fire, ESC to exit')
+print('Press Q to aim higher, A to aim lower, L to toggle laser, SPACE to fire, ESC to exit')
 
 try:
     delay_between_commands = 0.05  # Adjust as needed
