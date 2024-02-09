@@ -12,12 +12,14 @@ Note: I follow these instructions: https://articulatedrobotics.xyz/ready-for-ros
 
 4. Flash the image onto the card using e.g. balena etcher. Windows portable version can be downloaded as exe from here: https://etcher.balena.io/ and run with a double-click, and flashing was reasonably fast, but verification failed, also on a second attempt. I tried from linux and it worked.
 
-5. Insert the SD card in RPi, connect it to a keyboard, mouse, screen and power, switch it on, and follow the steps of the ubuntu MATE OS setup process.
+5. Insert the SD card in RPi, connect it to a keyboard, mouse, screen and power, switch it on, and follow the steps of the ubuntu MATE OS setup process. Sloow.
+
 6. update and upgrade. This fixes some bugs with Welcome, Software Boutique and others, see: https://ubuntu-mate.community/t/ubuntu-mate-welcome-and-software-boutique-fail-to-run-with-similar-errors/25371):
 ```bash
 $ sudo apt update
 $ sudo apt upgrade
 ```
+Also sloow.
 
 7. Install needed software 
 
