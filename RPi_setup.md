@@ -18,7 +18,8 @@ Note: I follow these instructions: https://articulatedrobotics.xyz/ready-for-ros
 $ sudo apt update
 $ sudo apt upgrade
 ```
-8. Install needed software 
+
+7. Install needed software 
 
    1. git with: ``$ sudo apt install git`
 
@@ -36,7 +37,7 @@ $ sudo apt upgrade
 
    8. ros humble rplidar 
 
-9. Apply needed config fixes (see https://www.youtube.com/watch?v=qoj5_fVBPII ) 
+8. Apply needed config fixes (see https://www.youtube.com/watch?v=qoj5_fVBPII ) 
 
    1. add user to video and dialout groups then log out
    2. set up network
@@ -44,7 +45,6 @@ $ sudo apt upgrade
    4. uninstall braille package which conflicts with `$ sudo apt remove brltty`
    5. reinstate legacy camera driver
 
-10. 
 
    
 
