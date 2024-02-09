@@ -13,8 +13,12 @@ Note: I follow these instructions: https://articulatedrobotics.xyz/ready-for-ros
 4. Flash the image onto the card using e.g. balena etcher. Windows portable version can be downloaded as exe from here: https://etcher.balena.io/ and run with a double-click, and flashing was reasonably fast, but verification failed, also on a second attempt. I tried from linux and it worked.
 
 5. Insert the SD card in RPi, connect it to a keyboard, mouse, screen and power, switch it on, and follow the steps of the ubuntu MATE OS setup process.
-
-7. Install needed software 
+6. update and upgrade. This fixes some bugs with Welcome, Software Boutique and others, see: https://ubuntu-mate.community/t/ubuntu-mate-welcome-and-software-boutique-fail-to-run-with-similar-errors/25371):
+```bash
+$ sudo apt update
+$ sudo apt upgrade
+```
+8. Install needed software 
 
    1. git with: ``$ sudo apt install git`
 
@@ -32,7 +36,7 @@ Note: I follow these instructions: https://articulatedrobotics.xyz/ready-for-ros
 
    8. ros humble rplidar 
 
-8. Apply needed config fixes (see https://www.youtube.com/watch?v=qoj5_fVBPII ) 
+9. Apply needed config fixes (see https://www.youtube.com/watch?v=qoj5_fVBPII ) 
 
    1. add user to video and dialout groups then log out
    2. set up network
@@ -40,7 +44,7 @@ Note: I follow these instructions: https://articulatedrobotics.xyz/ready-for-ros
    4. uninstall braille package which conflicts with `$ sudo apt remove brltty`
    5. reinstate legacy camera driver
 
-9. 
+10. 
 
    
 
