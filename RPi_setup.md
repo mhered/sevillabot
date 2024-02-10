@@ -27,7 +27,7 @@ Also sloow.
 
    2. arduino 1.8.19 for ARM with: `$ sudo apt install arduino`. Then add user to `dialout` group (GUI asks directly, logout is required)
 
-   3. ssh
+   3. ssh with: `$ sudo apt install openssh-server`
 
    4. ROS
 
