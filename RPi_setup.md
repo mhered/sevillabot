@@ -32,7 +32,7 @@ At the end of this some issues remain:
 
 2. arduino 1.8.19 for ARM with: `$ sudo apt install arduino`. Then add the user to the `dialout` group with `$ sudo usermod -a -G dialout <username>` then logout (GUI also asks for this, and reminds logout is required). Serial ports were not working due to a conflict with some Braille package, which needs deinstallling with `$ sudo apt remove brltty` cfr. https://www.youtube.com/watch?v=qoj5_fVBPII. Test with **Blink** and **AnalogReadSerial** from **Examples/01. Basics**
 
-3. ssh with: `$ sudo apt install openssh-server`
+3. ssh with: `$ sudo apt install openssh-server` get local IP address of bot with `$ ip addr` and write it down. Now we can remotely ssh from laptop with `ssh <bot_username_bot>@<bot_addr> # e.g. mhered@192.168.8.170`
 
 4. ROS
 
