@@ -23,9 +23,9 @@ Also sloow.
 
 7. Install needed software 
 
-   1. git with: ``$ sudo apt install git`
+   1. git with: `$ sudo apt install git`
 
-   2. arduino IDE 1 for ARM 64b (Note the latest IDE2 is not compatible with ARM)
+   2. arduino 1.8.19 for ARM with: `$ sudo apt install arduino`. Then add user to `dialout` group (GUI asks directly, logout is required)
 
    3. ssh
 
