@@ -24,7 +24,7 @@ $ sudo apt upgrade
 Also veery sloow.
 
 At the end of this some issues remain:
-- [ ] no audio output from HDMI despite I tried several fixes including selecting output, using HDMI0, and this: https://ubuntu-mate.org/raspberry-pi/ 
+- [ ] still no audio output from HDMI despite I tried several fixes including selecting output, using HDMI0 (from [here](https://forums.raspberrypi.com/viewtopic.php?t=282220), and modifying config files from [here](https://ubuntu-mate.org/raspberry-pi/).
 
 ## Install needed software 
 
