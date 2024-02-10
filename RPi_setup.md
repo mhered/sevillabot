@@ -1,8 +1,10 @@
-# Raspberry Pi 4B 4Gb setup for ROS 2 Humble
-
-ROS2 Humble runs on Ubuntu 22.04 Jammy Jellyfish 
+# Raspberry Pi 4B 4Gb setup for ROS2 Humble
 
 Note: I follow these instructions: https://articulatedrobotics.xyz/ready-for-ros-1-what-you-need/ which lead here: https://www.techradar.com/how-to/how-to-install-ubuntu-on-the-raspberry-pi then adapt them following these guidelines to port to Humble: https://www.youtube.com/watch?v=qoj5_fVBPII 
+
+## Install ubuntu MATE 22.04 
+
+ROS2 Humble requires Ubuntu 22.04 Jammy Jellyfish (or derivative)
 
 1. Buy a 64Gb microSD card (as recommended here: https://ubuntu-mate.org/raspberry-pi/).
 
@@ -21,30 +23,34 @@ $ sudo apt upgrade
 ```
 Also veery sloow.
 
-7. Install needed software 
+At the end of this some issues remain:
+- [ ] no audio output from HDMI despite I tried several fixes including selecting output, using HDMI0, and this: https://ubuntu-mate.org/raspberry-pi/ 
 
-   1. git with: `$ sudo apt install git`
+## Install needed software 
 
-   2. arduino 1.8.19 for ARM with: `$ sudo apt install arduino`. Then add the user to the `dialout` group with `$ sudo usermod -a -G dialout <username>` then logout (GUI also asks for this, and reminds logout is required). Serial ports were not working due to a conflict with some Braille package, which needs deinstallling with `$ sudo apt remove brltty` cfr. https://www.youtube.com/watch?v=qoj5_fVBPII. Test with **Blink** and **AnalogReadSerial** from **Examples/01. Basics**
+1. git with: `$ sudo apt install git`
 
-   3. ssh with: `$ sudo apt install openssh-server` (
+2. arduino 1.8.19 for ARM with: `$ sudo apt install arduino`. Then add the user to the `dialout` group with `$ sudo usermod -a -G dialout <username>` then logout (GUI also asks for this, and reminds logout is required). Serial ports were not working due to a conflict with some Braille package, which needs deinstallling with `$ sudo apt remove brltty` cfr. https://www.youtube.com/watch?v=qoj5_fVBPII. Test with **Blink** and **AnalogReadSerial** from **Examples/01. Basics**
 
-   4. ROS
+3. ssh with: `$ sudo apt install openssh-server`
 
-   5. python3 serial
+4. ROS
 
-   6. v4lutils
+5. python3 serial
 
-   7. ros humble v4l2 camera
+6. v4lutils
 
-   8. ros humble rplidar 
+7. ros humble v4l2 camera
 
-8. Apply needed config fixes (see https://www.youtube.com/watch?v=qoj5_fVBPII ) 
+8. ros humble rplidar 
 
-   1. https://ubuntu-mate.org/raspberry-pi/ has recommendation to fix audio problems but it doesn't work 
-   2. add user to video and dialout groups then log out
-   3. set up network
-   4. fix screen rotation
-   5. reinstate legacy camera driver
+## Other needed config fixes
+
+See https://www.youtube.com/watch?v=qoj5_fVBPII
+
+1. add user to video group then log out
+2. set up network
+3. fix screen rotation problem
+4. reinstate legacy camera driver
 
 
