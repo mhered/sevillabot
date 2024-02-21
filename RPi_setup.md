@@ -8,7 +8,7 @@ ROS2 Humble requires Ubuntu 22.04 Jammy Jellyfish (or derivative)
 
 1. Buy a 64Gb microSD card (as recommended here: https://ubuntu-mate.org/raspberry-pi/).
 
-2. Format the card FAT32. Not straightforward from a Windows 11 computer, which will insist you use exFAT formats for drives >32Gb. Command line: `> format /FS:FAT32 E:` seemed to be working but it's veeery slow! Instead I did it in Ubuntu.
+2. Format the card FAT32. Not straightforward from a Windows 11 computer, which will insist you use exFAT formats for drives >32Gb. Command line: `> format /FS:FAT32 E:` seemed to be working but was veeery slow! Instead I did it in Ubuntu. Straightforward.
 
 3. Download the Ubuntu MATE 22.04.3 LTS arm64 image from here: https://ubuntu-mate.org/download/arm64/jammy/ You may want to verify the checksum (in Windows use`> certutil -hashFile PATH-TO-FILE SHA256`)
 
@@ -23,22 +23,18 @@ ROS2 Humble requires Ubuntu 22.04 Jammy Jellyfish (or derivative)
 $ sudo apt update
 $ sudo apt upgrade
 ```
-Also veery sloow.
+Also it is veery sloow.
 
-At the end of this some issues remain:
-- [ ] still no audio output from HDMI despite I tried several fixes including selecting output, using HDMI0 (from [here](https://forums.raspberrypi.com/viewtopic.php?t=282220), and modifying config files from [here](https://ubuntu-mate.org/raspberry-pi/).
+At the end of this process some issues remain:
+- [ ] still no audio output from RPi HDMI despite I tried several fixes including selecting output, plugging on HDMI0 (from [here](https://forums.raspberrypi.com/viewtopic.php?t=282220)), and modifying config files from [here](https://ubuntu-mate.org/raspberry-pi/).
 
 ## Install needed software 
 
 1. **git** with: `$ sudo apt install git`
-
 2. **arduino**  1.8.19 for ARM with: `$ sudo apt install arduino`. Then add the user to the `dialout` group with `$ sudo usermod -a -G dialout <username>` then logout (GUI also asks for this, and reminds logout is required). Serial ports were not working due to a conflict with some Braille package, which needs deinstallling with `$ sudo apt remove brltty` cfr. https://www.youtube.com/watch?v=qoj5_fVBPII. Test with **Blink** and **AnalogReadSerial** from **Examples/01. Basics**
-
 3. **ssh** with: `$ sudo apt install openssh-server` get local IP address of bot with `$ ip addr` and write it down. Now we can remotely ssh from laptop with `ssh <bot_username_bot>@<bot_addr> # e.g. mhered@192.168.8.170`
-
 4. **pyserial-miniterm** (previously `miniterm`, note the change of name in 22.04) with: `$ sudo apt install python3-serial`
-
-5. install and configure vs-code ssh and arduino extensions to remotely flash arduino from RPi4 following these instructions:https://www.youtube.com/watch?v=2BJ-iJF04VA
+5. install and configure vs-code **ssh and arduino extensions** to remotely flash arduino from RPi4 following these instructions: https://www.youtube.com/watch?v=2BJ-iJF04VA
 
 ## Install ROS Humble
 
@@ -93,21 +89,10 @@ $ echo "source /opt/ros/humble/setup.bash" >> ~/.bashrc
 $ source ~/.bashrc
 ```
 
-6. Test communication between a C++ node running on the laptop and a python node on the bot
+6. Test communication between a C++ node running on the PC and a python node on the bot
 
 ```bash
-(laptop:)$ ros2 run demo_nodes_cpp talker
-...
-[INFO] [1662750396.990408713] [talker]: Publishing: 'Hello World: 67'
-[INFO] [1662750397.990414028] [talker]: Publishing: 'Hello World: 68'
-[INFO] [1662750398.990288416] [talker]: Publishing: 'Hello World: 69'
-...
-```
-
-​    
-
-```bash
-(bot:)$ ros2 run demo_nodes_py listener
+$ ros2 run demo_nodes_py listener
 ...
 [INFO] [1662750392.965285945] [listener]: I heard: [Hello World: 63]
 [INFO] [1662750393.965151014] [listener]: I heard: [Hello World: 64]
@@ -115,23 +100,118 @@ $ source ~/.bashrc
 ...
 ```
 
-Next step: upgrade laptop to Humble (see [this Articulated Robotics video](https://www.youtube.com/watch?v=qoj5_fVBPII) and [this Medium article](https://robofoundry.medium.com/notes-on-upgrading-to-ubuntu-22-04-and-ros2-humble-8149804abc91) )
 
-or maybe use docker?: https://betterprogramming.pub/how-to-use-docker-to-run-multiple-ros-distributions-on-the-same-machine-d851b42aed5
 
-## Install other software
+```bash
+(PC):$ ros2 run demo_nodes_cpp talker
+...
+[INFO] [1662750396.990408713] [talker]: Publishing: 'Hello World: 67'
+[INFO] [1662750397.990414028] [talker]: Publishing: 'Hello World: 68'
+[INFO] [1662750398.990288416] [talker]: Publishing: 'Hello World: 69'
+...
+```
 
-1. v4lutils
+Hurray! It works even with foxy on PC and humble on RPi!    
 
-2. ros humble v4l2 camera
+Next steps: 
 
-3. ros humble rplidar 
+- [ ] upgrade laptop to Humble (see [this Articulated Robotics video](https://www.youtube.com/watch?v=qoj5_fVBPII) and [this Medium article](https://robofoundry.medium.com/notes-on-upgrading-to-ubuntu-22-04-and-ros2-humble-8149804abc91) )
+- [ ] or maybe use docker?: https://betterprogramming.pub/how-to-use-docker-to-run-multiple-ros-distributions-on-the-same-machine-d851b42aed5
 
-## Other needed config fixes
+## Camera
+
+1. Connect the Pi camera. Note if camera was connected while the RPi was on, you may need to reboot.
+
+2. Reinstate the legacy camera driver from 20.04 (fix suggested by Josh Newan) by editing the following lines in the config file with `(Rpi):$ sudo nano /boot/firmware/config.txt`:
+
+   ```
+   ...
+   camera_auto_detect=0 # was 1, modified by MH to reinstate legacy camera driver
+   display_auto_detect=1
+   start_x=1 # added by MH to reinstate legacy camera driver
+   ...
+   ```
+
+3. Install sfw in Rpi ( **v4l2-utils** video driver library and ros node):
+
+   ```bash
+   $ sudo apt update
+   $ sudo apt upgrade
+   $ sudo apt install libraspberrypi-bin v4l-utils ros-humble-v4l2-camera
+   ```
+
+4. If needed add the user to the video group:
+
+   ```bash
+   $ sudo usermod -aG video mhered
+   $ groups
+   mhered adm dialout cdrom sudo dip plugdev lpadmin sambashare
+   ```
+
+   Reboot for group changes to take effect
+
+5. Check the camera is detected and supported with:
+
+```bash
+$ vcgencmd get_camera
+supported=1 detected=1, libcamera interfaces=0
+```
+
+If the RPi is connected to a screen you may check streaming with:
+
+```bash
+$ raspistill -k
+```
+
+Quit with `x`
+
+Check if `v4l` (video for linux) can see the camera with:
+
+```bash
+$ v4l2-ctl --list-devices
+bcm2835-codec-decode (platform:bcm2835-codec):
+	/dev/video10
+	/dev/video11
+	/dev/video12
+	/dev/media1
+
+bcm2835-isp (platform:bcm2835-isp):
+	/dev/video13
+	/dev/video14
+	/dev/video15
+	/dev/video16
+	/dev/media0
+
+mmal service 16.1 (platform:bcm2835-v4l2):
+	/dev/video0
+```
+
+Install **image transport library** and **rqt_image_view**:
+
+```bash
+$ sudo apt install ros-humble-image-transport-plugins ros-humble-rqt-image-view
+```
+
+Launch driver node:
+
+```bash
+$ ros2 run v4l2_camera v4l2_camera_node --ros-args -p image_size:="[640,480]" -p camera_frame_id:=camera_link_optical
+```
+
+Then launch `rqt_image_view` from the PC:
+
+```bash
+(PC):$ ros2 run rqt_image_view rqt_image_view
+```
+
+Hurray! the bot broadcasts video to the laptop!!
+
+Note: it broadcasts only over `/image_raw_compressed/`
+
+## Other software and needed config fixes
 
 See https://www.youtube.com/watch?v=qoj5_fVBPII
 
-1. add user to video group then log out
-2. fix screen rotation problem
-4. reinstate legacy camera driver
+1. fix screen rotation problem?
+2. Setup lidar? ros humble rplidar 
 
