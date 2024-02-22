@@ -118,6 +118,62 @@ Next steps:
 - [ ] upgrade laptop to Humble (see [this Articulated Robotics video](https://www.youtube.com/watch?v=qoj5_fVBPII) and [this Medium article](https://robofoundry.medium.com/notes-on-upgrading-to-ubuntu-22-04-and-ros2-humble-8149804abc91) )
 - [ ] or maybe use docker?: https://betterprogramming.pub/how-to-use-docker-to-run-multiple-ros-distributions-on-the-same-machine-d851b42aed5
 
+## Moving the robot
+
+Continue following instructions here: https://www.youtube.com/watch?v=qoj5_fVBPII
+
+Need to install some more dependencies:
+
+```bash
+$ sudo apt install ros-humble-ros2-control ros-humble-xacro
+```
+
+Create a workspace, clone repos and build
+
+Clone: robot repo from manolobot (used "the good way", making a symlink, see https://github.com/mhered/manolobot/blob/main/Part-4-Simulation-Jan23.md), diffdrive from specific branch of buzzology fork and serial library from josh fork:
+
+```bash
+$ git clone https://github.com/mhered/manolobot.git
+$ mkdir -p ~/robot_ws/src
+$ ln -s ~/manolobot/manolobot_uno/ ~/robot_ws/src/
+
+$ cd ~/robot_ws/src
+$ git clone http://github.com/buzzology/diffdrive_arduino
+$ cd diffdrive_arduino
+$ git checkout 3883c00
+
+$ cd ~/robot_ws/src
+$ git clone http://github.com/joshnewans/serial
+```
+
+Then build and source workspace, run the node that listens for commands:
+
+```bash
+$ cd ~/robot_ws
+$ colcon build --symlink-install
+$ source install/setup.bash
+$ ros2 run serial_motor_demo driver --ros-args -p serial_port:=/dev/ttyUSB0 -p baud_rate:=57600 -p loop_rate:=30 -p encoder_cpr:=1975
+```
+
+In the PC build workspace and run GUI:
+
+```bash
+(PC):$ cd dev_ws
+(PC):$ source install/setup.bash
+(PC):$ $ ros2 run serial_motor_demo gui
+```
+
+Hurray! Can control motor over ROS2 with PC in foxy and bot in humble!!
+
+However, the original launch file does not work...
+
+```bash
+$ ros2 launch manolobot_uno launch_robot.launch.py 
+[Some Error]
+```
+
+- [ ] To do: find out what is wrong
+
 ## Camera
 
 1. Connect the Pi camera. Note if camera was connected while the RPi was on, you may need to reboot.
@@ -207,6 +263,8 @@ Then launch `rqt_image_view` from the PC:
 Hurray! the bot broadcasts video to the laptop!!
 
 Note: it broadcasts only over `/image_raw_compressed/`
+
+
 
 ## Other software and needed config fixes
 
