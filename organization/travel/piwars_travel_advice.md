@@ -21,31 +21,4 @@ Each airline seems to have slightly different constraints, so we need to take th
 * This [MAX505S](https://www.amazon.es/Plastica-Panaro-MAX505S-Maleta-Alveolar/dp/B00PUL5TAK/) costs 127€, and weighs 4 kg, but has no wheels.
 * An inexpensive - and lighter - alternative may be to mod a basic trolley (e.g. [this one](https://www.amazon.es/gp/product/B0CD2X69VD/) costs 66€ and weighs 2.8 kg) with a kit of pre-diced foam, which costs around 30€, and weighs under 600 g see e.g. [this one in amazon.es](https://www.amazon.es/dp/B08NG2BBJ4/). Under 100€ and 3.4 kg. 
 
-Finally, we may need to send tools in advance as I doubt they will be alloed as carry-on...
-
-# Outbound Flight
-
-## 18/4 SVQ - PMI Vueling 3941 8:50 - 10:25
-
-Booking code QIRNWG (551,35€)
-
-Duration 1 h 35'
-
-Seats booked in row 27. 
-
-We all have 2 pieces of carry-on luggage: 
-
-- 1 piece 40 x 20 x 30 cm, under the seat
-- 1 piece 55 x 40 x 20 cm, max 10 kg, in overhead compartment
-
-### There is 1 h 45' for the self-transfer in Palma de Mallorca. 
-
-## 18/4 PMI- LTN Wizz Air W95352 12:10 - 13:50 
-
-Confirmation code IL7UHN (412,23€)
-
-Duration 2 h 40'
-
-Seats booked in row 8. 
-
-Everyone except Jose have Priority (1 piece 40 x 20 x 30 cm under the seat + 1 piece 55 x 40 x 23 cm, max 10 kg in overhead compartment). Jose only has the smaller piece under the seat. This could cause problems in the priority boarding. 
+Finally, we may need to send tools in advance as I doubt they will be allowed as carry-on...
