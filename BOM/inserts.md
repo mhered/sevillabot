@@ -15,3 +15,7 @@ Video tutorial: https://www.youtube.com/watch?v=P7nHyI1TwKY
 
 
 
+## A table of hole sizes from other brand
+
+![](./assets/insert_size_table.png)
+
