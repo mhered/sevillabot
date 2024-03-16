@@ -184,3 +184,6 @@ During calibration (about 10") move sensor to show full range (e.g. black line a
 ...
 ```
 
+Another tutorial: https://www.instructables.com/PID-Based-Line-Following-Robot-With-POLALU-QTR-8RC/
+
+A great video on PID: https://www.youtube.com/watch?v=4Y7zG48uHRo
