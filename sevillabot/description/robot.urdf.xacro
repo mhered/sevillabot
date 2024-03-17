@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro"  name="manolobot_uno">
+
+
+    <xacro:arg name="use_ros2_control" default="true" />
+
+    <!-- PROPERTIES -->
+    <xacro:include filename="properties.xacro" />
+
+    <!-- CORE ROBOT DESCRIPTION -->
+    <xacro:include filename="robot_core.xacro" />
+
+    <!-- toggle between ROS2 CONTROL -->
+    <xacro:if value ="$(arg use_ros2_control)">
+        <xacro:include filename="ros2_control.xacro" />
+    </xacro:if>
+
+    <!-- and GAZEBO -->
+    <xacro:unless value ="$(arg use_ros2_control)">
+        <xacro:include filename="gazebo_control.xacro" />
+    </xacro:unless>
+
+    <!-- LIDAR -->
+    <xacro:include filename="lidar.xacro" />
+
+    <!-- CAMERA -->
+    <xacro:include filename="camera.xacro" />
+
+</robot>
