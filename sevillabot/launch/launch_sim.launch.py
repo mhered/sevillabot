@@ -20,7 +20,7 @@ def generate_launch_description():
     use_ros2_control = LaunchConfiguration('use_ros2_control')
 
 
-    package_name='manolobot_uno'
+    package_name='sevillabot'
 
     # Include the robot_state_publisher launch file
     # Enabling sim time and passing use_ros2_control parameter

@@ -12,7 +12,7 @@ import xacro
 
 def generate_launch_description():
 
-    package_name = 'manolobot_uno'
+    package_name = 'sevillabot'
 
     # Check parameters that toggle use of sim time and ros2_control
     use_sim_time = LaunchConfiguration('use_sim_time')

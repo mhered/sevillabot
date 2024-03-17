@@ -252,16 +252,16 @@ Continue following instructions here: https://github.com/mhered/manolobot/blob/m
 
 Create a workspace, clone repos and build
 
-Clone robot repo from manolobot , diffdrive and serial library from josh fork (using "the good way", making a symlink, see https://github.com/mhered/manolobot/blob/main/Part-4-Simulation-Jan23.md):
+Clone robot repo from sevillabot , diffdrive and serial library from josh fork (using "the good way", making a symlink, see https://github.com/mhered/manolobot/blob/main/Part-4-Simulation-Jan23.md):
 
 ```bash
-$ git clone https://github.com/mhered/manolobot.git # clone manolobot
+$ git clone https://github.com/mhered/sevillabot.git # clone sevillabot
 $ cd ~/git
 $ git clone https://github.com/joshnewans/serial_motor_demo.git # clone demo node
 $ git clone https://github.com/joshnewans/diffdrive_arduino # clone diffdrive
 $ git clone http://github.com/joshnewans/serial # clone serial
 $ mkdir -p ~/robot_ws/src # create workspace and make symlinks
-$ ln -s ~/manolobot/manolobot_uno/ ~/robot_ws/src/ 
+$ ln -s ~/sevillabot/sevillabot/ ~/robot_ws/src/ 
 $ $ ln -s ~/git/serial_motor_demo/ ~/robot_ws/src/
 ln -s ~/git/diffdrive_arduino/ ~/robot_ws/src/ 
 $ ln -s ~/git/serial/ ~/robot_ws/src 
@@ -286,7 +286,7 @@ In the PC build workspace and run GUI:
 
 Hurray! Can control motor over ROS2 with PC and bot in foxy!!
 
-And then, following the instructions in https://github.com/mhered/manolobot/blob/main/Quick-start-guide.md I can control the robot with a gamepad!!
+And then, following the instructions in [Quick Start Guide](./Quick-start-guide.md) you can control the robot with a gamepad.
 
 ## Camera
 
@@ -300,28 +300,27 @@ And then, following the instructions in https://github.com/mhered/manolobot/blob
    $ sudo apt install libraspberrypi-bin v4l-utils ros-foxy-v4l2-camera
    ```
    
-4. If needed add the user to the video group:
+3. If needed add the user to the video group:
 
    ```bash
    $ sudo usermod -aG video mhered
-   $ groups
-   mhered adm dialout cdrom sudo dip plugdev lpadmin sambashare
    ```
 
    Reboot for group changes to take effect
+
+   ```bash
+   $ groups
+   mhered adm dialout cdrom sudo audio video plugdev games users input render netdev bluetooth gpio spi i2c
+   ```
 
 5. Check the camera is detected and supported with:
 
 ```bash
 $ vcgencmd get_camera
-VCHI initialization failed 
-
-# should be supported=1 detected=1, libcamera interfaces=0
+supported=1 detected=1
 ```
 
-Fixed after adding the line `start_x=1` to file `/boot/firmware/config.txt`, saving and rebooting (solution here: https://askubuntu.com/questions/1211805/raspberry-picamera-on-ubuntu-not-found?rq=1)
-
-Well, in actual fact, for 22.04 Josh Newan recommended reinstating the legacy camera driver from 20.04  by editing the following lines in the config file with `(Rpi):$ sudo nano /boot/firmware/config.txt`:
+Initially I got `VCHI initialization failed`. I fixed after adding the line `start_x=1` to file `/boot/firmware/config.txt`, saving and rebooting (solution here: https://askubuntu.com/questions/1211805/raspberry-picamera-on-ubuntu-not-found?rq=1). Well, in actual fact, for 22.04 Josh Newan recommended reinstating the legacy camera driver from 20.04  by editing the following lines in the config file with `(Rpi):$ sudo nano /boot/firmware/config.txt`:
 
 ```
 ...

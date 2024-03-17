@@ -14,7 +14,7 @@ from ament_index_python.packages import get_package_share_directory
 def generate_launch_description():
 
     joy_params = os.path.join(
-            get_package_share_directory('manolobot_uno'),
+            get_package_share_directory('sevillabot'),
             'config',
             'joystick.yaml'
         )

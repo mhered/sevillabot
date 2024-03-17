@@ -19,7 +19,7 @@ from launch_ros.actions import Node
 def generate_launch_description():
 
 
-    package_name='manolobot_uno'
+    package_name='sevillabot'
 
     # Include the robot_state_publisher launch file 
     # Disabling use of sim time and enabling ros2_control
