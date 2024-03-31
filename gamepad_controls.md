@@ -63,10 +63,59 @@ https://answers.ros.org/question/299269/ros2-run-python-executable-not-found/
 >   )
 > ```
 
-
-
 Apparently mixing CPP and python in a package is a big deal, see more details here:
 https://roboticsbackend.com/ros2-package-for-both-python-and-cpp-nodes/
 
 Not sure how I got it to work the first time but I am pretty sure I didnt add the `install ( PROGRAMS...` part.
 
+To compile:
+
+```bash
+$ cd ~/robot_ws
+$ colcon build --symlink-install 
+$ source install/setup.bash
+```
+
+## Quick start
+
+To run you need to open several ssh terminals, source and run different nodes:
+
+```bash
+(bot1):$ ros2 launch sevillabot launch_robot.launch.py # spawns bot
+(bot2):$ ros2 launch sevillabot joystick.launch.py # launches joy_node and teleop_node with params and remapping of cmd_vel
+(bot3):$ ros2 run sevillabot joy_subscriber.py # launch joy_subscriber
+```
+
+## Note on unique Arduino addresses
+
+`/dev/ttyUSB*` depends of plugging order
+
+`/dev/serial/by-id/*` is supposedly an unique ID but all my Arduino nanos share the same!: `/dev/serial/by-id/usb-1a86_USB2.0-Ser_-if00-port0`
+
+`/dev/serial/by-path/*` depends on where the device is physically connected  (which USB port). Could work if we assign dedicated USB ports to specific Arduinos and are consistent with it.
+
+| RPi4 USB port position | `/dev/serial/by-path/*` address of Arduino nano |
+| -- | -- |
+| top right | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0-port0` |
+| bottom right | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0-port0` |
+| top right | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.3:1.0-port0` |
+| bottom left | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.4:1.0-port0` |
+
+Found using:
+
+```bash
+$ ls -l /dev/ttyUSB* # detects serial devices
+$ udevadm info /dev/ttyUSB0 # gets info for each device
+```
+
+![](./assets/RPi_USB_ports_assignment.jpg)
+
+Assignment of sevillabot USB ports: Arduino for Base robot in 1, Addon Arduino in 2, Gamepad dongle in 3, 4 is spare
+
+
+
+Modified both [ros2_control.xacro](./sevillabot/description/ros2_control.xacro) and [joy_subscriber.py](./sevillabot/scripts/joy_subscriber.py) to use  `/dev/serial/by-path/*` instead of `/dev/ttyUSB*` or `/dev/serial/by-id/*`
+
+And now it works!
+
+Note: the stepper motor just waiting consumes ~0.25A*12V = 3W!! And it gets hot!!  

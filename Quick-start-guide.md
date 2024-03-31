@@ -34,26 +34,14 @@ mhered@192.168.8.170's password:
 (bot T1)$ ros2 launch sevillabot launch_robot.launch.py
 ```
 
-### Launch RVIZ with config file in the PC
-
-Source ROS2 workspace in PC and launch RVIZ:
-
-```bash
-(PC T2)$ cd ~/dev_ws/
-(PC T2)$ source install/setup.bash
-(PC T2)$ rviz2 -d ~/dev_ws/src/sevillabot/config/bot_with_sensors.rviz
-```
-
-Note we use a predefined config file but it is not necessary
-
 ### Move the robot
 
-#### With keyboard 
+#### With keyboard from PC
 
 Launch keyboard teleop controller in PC:
 
 ```bash
-(PC T3)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
+(PC T2)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
 ```
 
 Note remapping of topic `/cmd_vel` to `/diff_cont/cmd_vel_unstamped`
@@ -61,6 +49,46 @@ Note remapping of topic `/cmd_vel` to `/diff_cont/cmd_vel_unstamped`
 Now you can move the robot from computer with the keyboard and see it in RVIZ!
 
 #### With a gamepad
+
+##### Using Logitech F710 from bot
+
+1. Connect gamepad USB dongle to RPi top left USB port (to free reserved ports to Arduinos)
+
+2. Ensure gamepad mode is set to **X** (check switch in front face of gamepad)
+
+3. to control only robot base ssh into RPi, source and launch joystick:
+
+```bash
+(PC T2)$ ssh mhered@sevillabot
+mhered@192.168.8.170's password: 
+...
+(bot T2)$ cd ~/robot_ws/
+(bot T2)$ source install/setup.bash
+(bot T2)$ ros2 launch sevillabot joystick.launch.py
+```
+
+Note: the controls are defined in a parameter file which implements:
+
+- Dead man switches: LB button (left shoulder) for normal speed, RB button (right shoulder) for turbo
+- Control on left stick: vertical axis for forward/backward motion and horizontal axis for rotation.
+
+4. to control addons, ssh again into RPi, source and launch `joy_subscriber` node:
+
+```bash
+(PC T3)$ ssh mhered@sevillabot
+mhered@192.168.8.170's password: 
+...
+(bot T3)$ cd ~/robot_ws/
+(bot T3)$ source install/setup.bash
+(bot T3)$ ros2 launch sevillabot joy_subscriber.py
+```
+
+- For zombie challenge: 
+  - Y button to toggle laser target
+  - X to fire 
+  - Digital pad UP / DOWN to adjust aim up or down
+- For Eco disaster
+  - Digital pad LEFT / RIGHT to open and close the claw
 
 ##### Binbok wireless from PC
 
@@ -74,27 +102,23 @@ Connect the gamepad to PC in Ubuntu:
 Launch gamepad controller:
 
 ```bash
-(PC T3)$ ros2 launch sevillabot joystick.launch.py
+(PC T2)$ ros2 launch sevillabot joystick.launch.py
+(PC T3)$ ros2 launch sevillabot joy_subscriber.py
 ```
 
-##### Logitech F710 from Pi
+##### 
 
-Connect USB dongle to RPi
+### Launch RVIZ with config file in the PC
 
-Open terminal in RPi
+Source ROS2 workspace in PC and launch RVIZ:
 
-Note: the controls are defined in a parameter file which implements:
+```bash
+(PC T4)$ cd ~/dev_ws/
+(PC T4)$ source install/setup.bash
+(PC T4)$ rviz2 -d ~/dev_ws/src/sevillabot/config/bot_with_sensors.rviz
+```
 
-- Dead man switches: L button (left shoulder) for normal speed, R button (right shoulder) for turbo
-- Control on left stick: vertical axis for forward/backward motion and horizontal axis for rotation.
-- For zombie challenge: 
-  - Y button to toggle laser target
-  - X to fire 
-  - Digital pad UP / DOWN to adjust aim up or down
-- For Eco disaster
-  - Digital pad LEFT / RIGHT to open and close the claw
-
-
+Note we use a predefined config file but it is not necessary
 
 ### Sensors
 
@@ -103,9 +127,12 @@ Note: the controls are defined in a parameter file which implements:
 SSH to the robot from another Terminal and launch the camera controller:
 
 ```bash
-(bot T2)$ cd ~/robot_ws/
-(bot T2)$ source install/setup.bash
-(bot T2)$ ros2 launch sevillabot camera.launch.py
+(PC T5)$ ssh mhered@sevillabot
+mhered@192.168.8.170's password: 
+...
+(bot T4)$ cd ~/robot_ws/
+(bot T4)$ source install/setup.bash
+(bot T4)$ ros2 launch sevillabot camera.launch.py
 ```
 
 In RVIZ Add Camera and select topic `/image_raw/compressed`
@@ -113,9 +140,9 @@ In RVIZ Add Camera and select topic `/image_raw/compressed`
 It does not show the camera feed in RVIZ as it should... BUT it works with RQT:
 
 ```bash
-(PC T4)$ cd ~/dev_ws/
-(PC T4)$ source install/setup.bash 
-(PC T4)$ ros2 run rqt_image_view rqt_image_view
+(PC T6)$ cd ~/dev_ws/
+(PC T6)$ source install/setup.bash 
+(PC T6)$ ros2 run rqt_image_view rqt_image_view
 ```
 
 #### Stream Lidar scans
@@ -123,9 +150,9 @@ It does not show the camera feed in RVIZ as it should... BUT it works with RQT:
 Launch the LIDAR controller:
 
 ```bash
-(bot T3)$ cd ~/robot_ws/
-(bot T3)$ source install/setup.bash
-(bot T3)$ ros2 launch ldlidar_stl_ros2 ld06.launch.py 
+(bot T5)$ cd ~/robot_ws/
+(bot T5)$ source install/setup.bash
+(bot T5)$ ros2 launch ldlidar_stl_ros2 ld06.launch.py 
 ```
 
 ## Power off sevillabot
@@ -152,7 +179,7 @@ See implementation in file `safe_shutdown.py` in: [](/home/mhered/manolobot/code
 
 ## To Do
 
-- [ ] copy code over to sevillabot and update calls
+- [x] copy code over to sevillabot and update calls
 - [ ] calibrate for sevillabot robot dimensions
 - [ ] move left-right to right joystick
 - [ ] add photos / video of battery charging
