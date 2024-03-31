@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" >
 
+    <!-- param device assumes the Robot base Arduino is plugged in the top-right USB port of the RPi -->
+
     <ros2_control name="RealRobot" type="system">
 
         <hardware>

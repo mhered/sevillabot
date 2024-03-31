@@ -14,7 +14,7 @@ class JoySubscriberNode:
         self.Y_button_prev_state = 0  # Previous state of Y button (trigger)
         self.waiting_for_arduino = False  # Flag to indicate if arduino is busy
         self.serial_port = serial.Serial(
-            #'/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.4:1.0-port0',
+            # assumes the Addon Arduino is plugged in the bottom-right USB port of the RPi
             '/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0-port0', 
             9600, 
             timeout=1)  # Adjust port and baud rate as needed
