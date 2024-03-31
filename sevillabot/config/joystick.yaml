@@ -9,14 +9,14 @@ joy_node:
 teleop_node:
   ros__parameters:
     axis_linear:  
-      x: 1      # Left thumb stick vertical
+      x: 1      # Left thumb stick vertical (should be 4?)
     scale_linear: 
       x: 0.5    # regular speed 0.5 m/s
     scale_linear_turbo:
       x: 1.0    # turbo speed 1 m/s
 
     axis_angular:  
-      yaw: 0    # Left thumb stick horizontal
+      yaw: 0    # Left thumb stick horizontal (shoul be 3?)
     scale_angular: 
       yaw: 1.0  # regular speed 1 rad/s
     scale_angular_turbo: 
