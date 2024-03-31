@@ -21,9 +21,9 @@ Balance charging the LiPo battery using the iMAX B6AC LiPo balance charger:
 
 Red switch on the side from **O** to **I**
 
-### Source ROS2 in the robot
+### Spawn the robot
 
-SSH into the robot and source ROS2 workspace:
+SSH into the robot , source ROS2 workspace and spawn the robot:
 
 ```bash
 (PC T1)$ ssh mhered@sevillabot
@@ -31,30 +31,20 @@ mhered@192.168.8.170's password:
 ...
 (bot T1)$ cd ~/robot_ws/
 (bot T1)$ source install/setup.bash
-```
-
-### Spawn the robot
-
-```bash
 (bot T1)$ ros2 launch sevillabot launch_robot.launch.py
 ```
 
-### Source ROS2 in the PC
+### Launch RVIZ with config file in the PC
 
-Source ROS2 workspace in PC:
+Source ROS2 workspace in PC and launch RVIZ:
 
 ```bash
 (PC T2)$ cd ~/dev_ws/
 (PC T2)$ source install/setup.bash
-```
-
-### Launch RVIZ with config file
-
-Note we use predefined config file but it is not necessary
-
-```bash
 (PC T2)$ rviz2 -d ~/dev_ws/src/sevillabot/config/bot_with_sensors.rviz
 ```
+
+Note we use a predefined config file but it is not necessary
 
 ### Move the robot
 
@@ -72,7 +62,9 @@ Now you can move the robot from computer with the keyboard and see it in RVIZ!
 
 #### With a gamepad
 
-Connect the gamepad in Ubuntu:
+##### Binbok wireless from PC
+
+Connect the gamepad to PC in Ubuntu:
 
 * ensure it is charged (or charge with microUSB)
 * to pair press HOME + SHARE (small button labelled 'S' on the left above the cross) until light flashes white (note if you press HOME + 'O' button on the right the white light blinks, not flashes)
@@ -82,13 +74,27 @@ Connect the gamepad in Ubuntu:
 Launch gamepad controller:
 
 ```bash
-$ ros2 launch sevillabot joystick.launch.py
+(PC T3)$ ros2 launch sevillabot joystick.launch.py
 ```
+
+##### Logitech F710 from Pi
+
+Connect USB dongle to RPi
+
+Open terminal in RPi
 
 Note: the controls are defined in a parameter file which implements:
 
 - Dead man switches: L button (left shoulder) for normal speed, R button (right shoulder) for turbo
 - Control on left stick: vertical axis for forward/backward motion and horizontal axis for rotation.
+- For zombie challenge: 
+  - Y button to toggle laser target
+  - X to fire 
+  - Digital pad UP / DOWN to adjust aim up or down
+- For Eco disaster
+  - Digital pad LEFT / RIGHT to open and close the claw
+
+
 
 ### Sensors
 

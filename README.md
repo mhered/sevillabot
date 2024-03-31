@@ -1,10 +1,10 @@
 # sevillabot
 This is the repo for the team **sevillabot** of PiWars 2024 competition:
+* [Quick Start Guide](./Quick-start_guide.md)
 * [Bill of Materials](./BOM.md)
 * [Activity Log](./activity_log.md)
-* [Travel Advice](./piwars_travel_advice.md)
-* [Soldering Tips](./soldering.md)
-* [Raspberri Pi setup](./RPi_setup.md)
+* [Raspberry Pi setup (20.04 / Foxy)](./RPi_setup_foxy.md) or alternatively [22.0 / Humble](./RPi_setup_humble.md)
 * [Motor wiring](./wiring.md)
+* [Soldering Tips](./soldering.md)
 
 Check out our [blog](https://sevillabot.blog).

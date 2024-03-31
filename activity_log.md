@@ -1,6 +1,6 @@
 # Made a blog in BlueHost
 
-see secrets.md in local
+See secrets.md in local
 
 # Made some logos
 
