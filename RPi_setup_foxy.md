@@ -262,8 +262,8 @@ $ git clone https://github.com/joshnewans/diffdrive_arduino # clone diffdrive
 $ git clone http://github.com/joshnewans/serial # clone serial
 $ mkdir -p ~/robot_ws/src # create workspace and make symlinks
 $ ln -s ~/sevillabot/sevillabot/ ~/robot_ws/src/ 
-$ $ ln -s ~/git/serial_motor_demo/ ~/robot_ws/src/
-ln -s ~/git/diffdrive_arduino/ ~/robot_ws/src/ 
+$ ln -s ~/git/serial_motor_demo/ ~/robot_ws/src/
+$ ln -s ~/git/diffdrive_arduino/ ~/robot_ws/src/ 
 $ ln -s ~/git/serial/ ~/robot_ws/src 
 ```
 
