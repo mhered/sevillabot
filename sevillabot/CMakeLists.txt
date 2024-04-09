@@ -22,7 +22,7 @@ find_package(ament_cmake REQUIRED)
 # find_package(<dependency> REQUIRED)
 
 # Install Python executables
-ament_python_install_package(scripts)
+ament_python_install_package(my_scripts/)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -41,7 +41,7 @@ install(
 )
 
 install(
-  PROGRAMS scripts/joy_subscriber.py  
+  PROGRAMS my_scripts/joy_subscriber.py  
   DESTINATION lib/${PROJECT_NAME} 
 )
 
