@@ -22,7 +22,7 @@ navigation: using maps to determine safe trajectory between locations.
 
 `base_footprint` frame is shadow of `base_link` on the 2D ground
 
-## `slam_toolbox`
+## Install and Setup
 
 1.  add `base _footprint` link to `robot_core.xacro`
 
@@ -55,7 +55,7 @@ $ cp /opt/ros/foxy/share/slam_toolbox/config/mapper_params_online_async.yaml sev
 Run with:
 
 ```bash
-$ ros2 launch sevillabot launch_sim.launch.py world:=~/dev_ws/src/sevillabot/worlds/obstacles.world
+(PC T1)$ ros2 launch sevillabot launch_sim.launch.py world:=~/dev_ws/src/sevillabot/worlds/obstacles.world
 ```
 
 Gazebo does not start!
@@ -69,16 +69,126 @@ After long troubleshooting and comparing with articubot_one from Josh Newans I f
 * in `ros2_control.xacro` file use `sim_mode` to toggle between DiffDriveArduino (real robot) and GazeboSystem (simulation). Add `gaz_ros2_ctl_use_sim.yaml` parameter file in call to `libgazebo_ros2_control.so`
 * Create `gaz_ros2_ctl_use_sim.yaml` parameter file that sets `use_sim_time` to  `true`
 
+Launch also rviz:
 
+```bash
+(PC T2)$ rviz2 -d ~/dev_ws/src/sevillabot/config/bot_with_sensors.rviz
+```
+
+Launch teleop (better to do with gamepad):
+
+```bash
+(PC T3)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
+```
+
+Launch SLAM:
+
+```bash
+(PC T2)$ ros2 launch slam_toolbox online_async_launch.py params_file:=./src/sevillabot/config/mapper_params_online_async.yaml use_sim_time:=true
+```
+
+In RVIZ:
+
+* add a Map and set the topic to /map
+
+* change the Fixed Frame from odom to map (this to have the map steady)
+* save RVIZ config to `slam_gazebo.rviz`
+
+## Quick Start Guide
+
+```bash
+(PC T1)$ ros2 launch sevillabot launch_sim.launch.py world:=~/dev_ws/src/sevillabot/worlds/obstacles.world
+
+(PC T2)$ ros2 launch slam_toolbox online_async_launch.py params_file:=./src/sevillabot/config/mapper_params_online_async.yaml use_sim_time:=true
+
+(PC T3)$ rviz2 -d ~/dev_ws/src/sevillabot/config/slam_gazebo.rviz
+
+(PC T4)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
+```
+
+## Creating a map
+
+Close everything an reopen
+
+Make sure config file `mapper_params_online_async.yaml` is ok: set mode to mapping, map file and start commented out: 
+
+```
+mode: mapping # localization or mapping depending on the activity
+...
+# map_file_name: /home/mhered/sevillabot/sevillabot/maps/map_obstacles_serial
+...
+# map_start_at_dock: true
+```
+
+In RVIZ:
+
+* Drive around to build the map
+* May help to switch View to TopDownOrthographic
+
+To S¡save the map:
+
+* In RVIZ Add New Panel
+* save map for external services eg navigation produces PGM + YAML, serialize to reuse in slam_toolbox produces DATA + POSEGRAPH
+* map files saved by default in the workspace `/dev_ws`
+
+## Using a map
+
+Close everything an reopen
+
+Modify config file `mapper_params_online_async.yaml`: set mode to localization, declare map full path without extension and set start at dock 
+
+```
+mode: localization # localization or mapping depending on the activity
+...
+map_file_name: /home/mhered/sevillabot/sevillabot/maps/map_obstacles_serial
+...
+map_start_at_dock: true
+```
 
 # Navigation
 
-Install dependencies:
+Install Nav2 dependencies:
 
 ```bash
 $ sudo apt install ros-foxy-navigation2 ros-foxy-nav2-bringup
 $ sudo apt install ros-foxy-twist-mux
 ```
+
+### AMCL Adaptive MonteCarlo Localization
+
+Several steps:
+
+1. Run a map server (from save version because it is external):
+
+```bash
+(PC T1)$ ros2 run nav2_map_server map_server --ros-args -p yaml_filename:=/home/mhered/sevillabot/sevillabot/maps/map_obstacles_save.yaml -p use_sim_time:=true
+```
+
+2. Activate it
+
+```bash
+(PC T2)$ ros2 run nav2_util lifecycle_bringup map_server
+```
+
+3. Relaunch gazebo, RVIZ and slam_toolbox
+
+In RVIZ take care Map is set to Reliable and Transient Local
+
+4. run acml
+
+```bash
+$ ros2 run nav2_amcl amcl --ros-args -p use_sim_time:=true
+```
+
+5. activate it
+
+```bash
+$ ros2 run nav2_util lifecycle_bringup amcl
+```
+
+HERE: run SLAM in the robot
+
+### Multiplexing velocities
 
 Will need to remap velocities from `/cmd_vel` where nav2 publishes to `/diff_cont/cmd_vel_unstamped` where our controller expects them, but instead we will multiplex velocities using `twist_mux`. This allows to prioritize, block topics on certain circumstances etc
 
