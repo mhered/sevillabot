@@ -1,5 +1,7 @@
 # SLAM
 
+## Intro
+
 grid SLAM with a 2D LiDAR
 
 mapping: requires global positioning to record environment
@@ -12,7 +14,7 @@ sometimes we only have starting point, detection and odometry and we need to do 
 
 navigation: using maps to determine safe trajectory between locations.
 
-## frame conventions
+## Frame conventions
 
 `base_link` is the frame attached to our robot
 
@@ -125,7 +127,7 @@ In RVIZ:
 * Drive around to build the map
 * May help to switch View to TopDownOrthographic
 
-To S¡save the map:
+To save the map:
 
 * In RVIZ Add New Panel
 * save map for external services eg navigation produces PGM + YAML, serialize to reuse in slam_toolbox produces DATA + POSEGRAPH
@@ -145,16 +147,15 @@ map_file_name: /home/mhered/sevillabot/sevillabot/maps/map_obstacles_serial
 map_start_at_dock: true
 ```
 
-# Navigation
+## AMCL Adaptive MonteCarlo Localization
 
-Install Nav2 dependencies:
+### Setup
+
+Install Nav2 (acml is part of nav2)
 
 ```bash
 $ sudo apt install ros-foxy-navigation2 ros-foxy-nav2-bringup
-$ sudo apt install ros-foxy-twist-mux
 ```
-
-### AMCL Adaptive MonteCarlo Localization
 
 Several steps:
 
@@ -186,11 +187,31 @@ $ ros2 run nav2_amcl amcl --ros-args -p use_sim_time:=true
 $ ros2 run nav2_util lifecycle_bringup amcl
 ```
 
-HERE: run SLAM in the robot
+## Run SLAM in the robot
 
-### Multiplexing velocities
 
-Will need to remap velocities from `/cmd_vel` where nav2 publishes to `/diff_cont/cmd_vel_unstamped` where our controller expects them, but instead we will multiplex velocities using `twist_mux`. This allows to prioritize, block topics on certain circumstances etc
+
+# Navigation
+
+## Intro
+
+Finding a safe trajectory between an initial and a target pose
+We will need:
+
+1. accurate position estimate ie localization from SLAM
+2. awareness of obstacles from 1) a static prerrecorded map used for plnning the trajectory + 2) updated live sensor data. Stored in a costmap (avoid high cost, low cost is safe)
+3. info about size and dynamics of the robot
+
+## Install
+
+```bash
+$ sudo apt install ros-foxy-navigation2 ros-foxy-nav2-bringup
+$ sudo apt install ros-foxy-twist-mux
+```
+
+## Multiplexing velocities
+
+Will need to remap velocities from `/cmd_vel` where nav2 publishes to `/diff_cont/cmd_vel_unstamped` where our controller expects them, but instead we will use `twist_mux` node to multiplex velocities. This allows to prioritize, block topics on certain circumstances etc
 
 We will set up `twist_mux` to take joystick velocities from `/cmd_vel_joy` and navigation velocities from `/cmd_vel` combine them and publish them to `/diff_cont/cmd_vel_unstamped` 
 
@@ -210,7 +231,7 @@ twist_mux:
         priority: 100
 ```
 
-Run with:
+1. Run with:
 
 ```bash
 $ ros2 run twist_mux twist_mux --ros-args --params-file ~/dev_ws/src/sevillabot/config/twist_mux.yaml -r cmd_vel_out:=diff_cont/cmd_vel_unstamped
@@ -219,3 +240,13 @@ $ ros2 run twist_mux twist_mux --ros-args --params-file ~/dev_ws/src/sevillabot/
 [INFO] [1712707933.767752264] [twist_mux]: Topic handler 'topics.navigation' subscribed to topic 'cmd_vel': timeout = 0.500000s , priority = 10.
 ```
 
+2. Launch gazebo, RVIZ and slam_toolbox
+
+3. Launch nav2
+
+```bash
+$ ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true
+```
+
+4. In RVIZ add a new Map, set topic to `/global_costmap/costmap`, set Color Scheme to costmap, turn off the other map.
+5. Set a 2D goal pose. It works!!
