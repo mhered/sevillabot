@@ -7,5 +7,6 @@ This is the repo for the team **sevillabot** of PiWars 2024 competition:
 * [Motor wiring](./wiring.md)
 * [Soldering Tips](./soldering.md)
 * [Gamepad Controls](./gamepad_controls.md)
+* [SLAM and Navigation](./SLAM_and_Navigation.md)
 
 Check out our [blog](https://sevillabot.blog).
