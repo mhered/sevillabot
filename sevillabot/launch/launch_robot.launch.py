@@ -37,6 +37,14 @@ def generate_launch_description():
                     }.items()
     )
 
+    # joystick_launch_file_path = os.path.join(
+    #                  get_package_share_directory(package_name),'launch',
+    #                 'joystick.launch.py'
+    #             )
+    # joystick = IncludeLaunchDescription(
+    #             PythonLaunchDescriptionSource([joystick_launch_file_path]), launch_arguments={'use_sim_time': 'true'}.items()
+    # )
+
 
     # Run the controller manager
     
@@ -93,6 +101,7 @@ def generate_launch_description():
     # Launch them all
     return LaunchDescription([
         rsp,
+        # joystick,
         delayed_controller_manager,
         delayed_diff_drive_spawner,
         delayed_joint_broad_spawner,
