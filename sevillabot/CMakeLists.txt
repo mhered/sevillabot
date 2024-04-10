@@ -20,6 +20,18 @@ find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
 # find_package(<dependency> REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(std_msgs REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
+
+# Declare ROS2 interface files
+rosidl_generate_interfaces(${PROJECT_NAME}
+  msg/TimestampedData.msg
+  DEPENDENCIES std_msgs
+)
+
+# Export dependencies
+ament_export_dependencies(rosidl_default_runtime)
 
 # Install Python executables
 ament_python_install_package(my_scripts/)
@@ -41,8 +53,10 @@ install(
 )
 
 install(
-  PROGRAMS my_scripts/joy_subscriber.py  
+  PROGRAMS 
+    my_scripts/joy_subscriber.py  
+    my_scripts/line_follower_publisher.py
+    my_scripts/pid.py
   DESTINATION lib/${PROJECT_NAME} 
 )
-
 ament_package()
