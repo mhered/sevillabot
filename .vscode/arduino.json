@@ -1,0 +1,7 @@
+{
+    "sketch": "code/arduino/line_follower/line_follower.ino",
+    "port": "/dev/ttyUSB0",
+    "configuration": "cpu=atmega328old",
+    "board": "arduino:avr:nano",
+    "programmer": "arduino:avrispmkii"
+}
