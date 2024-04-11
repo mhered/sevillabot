@@ -60,7 +60,7 @@ I need to call it from vs_code terminal, and after that it runs well... why?
 
 ## Testing Line Follower
 
-### Quick Start Guide
+### Quick Start Guide Gazebo
 
 Plug the line follower add-on
 
@@ -79,4 +79,77 @@ Launch  publisher, PID, gazebo, RVIZ and twist_mux
 
 ```
 
-When moving the sensor away from the line the robot turns
+When moving the sensor away from the line the robot turns to counter the error!!
+
+## Quick Start Guide Robot
+
+### Launch the robot
+
+Currently requires three calls, each of which requires to ssh into sevillabot, `cd ~/robot_ws`, `source install/setup.bash`. I should combine these three in a single launch file.
+
+```
+(bot T1)$ ros2 launch sevillabot launch_robot.launch.py # launch robot
+
+(bot T2)$ ros2 launch sevillabot joystick.launch.py # launch gamepad
+
+(bot T3)$ ros2 run twist_mux twist_mux --ros-args --params-file ~/robot_ws/src/sevillabot/config/twist_mux.yaml -r cmd_vel_out:=diff_cont/cmd_vel_unstamped # launch twist_mux
+```
+
+### Launch the subscriber
+
+I don't know yet why the subscriber is not launching properly but found a hack that works:
+
+1. miniterm onto Arduino. Note this triggers calibration (2 solid LED in Arduino) and it takes a little while before it starts publishing data. Move around the sensor in and out the line during the calibration period, otherwise data will not be reliable later. When calibration finishes, LEDs in the Arduino start blinking.
+
+```bash
+(bot T4)$ miniterm 
+
+--- Available ports:
+---  1: /dev/ttyAMA0         'ttyAMA0'
+---  2: /dev/ttyUSB0         'USB2.0-Ser!'
+---  3: /dev/ttyUSB1         'USB2.0-Ser!'
+--- Enter port index or full name: 3
+
+E:12568	3500 #frozen during calibration
+E:12568	3500
+E:12568	3500
+E:12568	3500
+....
+E:16367	3500 # then starts transmitting
+E:16620	3501
+E:16873	3502
+E:17127	3498
+E:17380	3499
+E:17633	3505
+```
+
+2. launch the node in another terminal
+
+```bash
+(bot T5)$ ros2 run sevillabot line_follower_publisher.py 
+```
+
+3. close miniterm in the previous terminal with `CTRL + ]`. This somehow wakes up the node and it starts publishing. 
+
+```bash
+(bot T4)$ # exit miniterm with CTRL + ] : hack to get line_follower_publisher.py to publish!!
+```
+
+### Launch the PID
+
+Warning: put the robot on blocks because soon as you launch this node the robot starts moving. 
+
+We can reuse Terminal 4 from miniterm
+
+```bash
+(PC T4)$ ros2 run sevillabot pid.py 
+```
+
+It works!
+
+## To do
+
+- [ ] Understand and fix why the `line_follower_publisher.py` node only works when launched from vs_code terminal (??). Seems related to serial communication. Opening and closing miniterm seems to work as well.
+- [ ] modify `pid.py` to read PID constants and linear speed from `line_follower.yaml` -> this will simplify fine tuning
+- [ ] integrate gamepad and twist_mux in the robot launch file `launch_robot.launch.py` this will simplify launching!
+- [ ] maybe integrate also line_follower_publisher.py and pid.py in a `launch_follower.launch.py`, this will simplify launching!
