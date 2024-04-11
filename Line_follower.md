@@ -58,3 +58,25 @@ I need to call it from vs_code terminal, and after that it runs well... why?
 
 
 
+## Testing Line Follower
+
+### Quick Start Guide
+
+Plug the line follower add-on
+
+Launch  publisher, PID, gazebo, RVIZ and twist_mux
+
+```bash
+(VSCODE Terminal!!)$ ros2 run sevillabot line_follower_publisher.py 
+
+(PC T1)$ ros2 run sevillabot pid.py 
+
+(PC T2)$ ros2 launch sevillabot launch_sim.launch.py world:=~/dev_ws/src/sevillabot/worlds/obstacles.world
+
+(PC T3)$ rviz2 -d ~/dev_ws/src/sevillabot/config/slam_gazebo.rviz
+
+(PC T4)$ ros2 run twist_mux twist_mux --ros-args --params-file ~/dev_ws/src/sevillabot/config/twist_mux.yaml -r cmd_vel_out:=diff_cont/cmd_vel_unstamped
+
+```
+
+When moving the sensor away from the line the robot turns
