@@ -11,9 +11,10 @@ class LineFollowerNode(Node):
         self.publisher_ = self.create_publisher(
             TimestampedData, '/line_follower_error', 10)
         self.serial_port = serial.Serial(
+            # PC config assuming this is the serial assigned 
             '/dev/ttyUSB0',
-            # assuming the Addon Arduino is plugged in the bottom-right USB port of the RPi
-            # '/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2:1.0-port0', 
+            # Robot config assuming the Addon Arduino is plugged in the bottom-left USB port of the RPi (cable too short!! )
+            # '/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.4:1.0-port0',
             9600, 
             timeout=1)  # Adjust port and baud rate as needed
 
