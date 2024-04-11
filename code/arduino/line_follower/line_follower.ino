@@ -104,7 +104,7 @@ void loop()
 
   // digitalWrite(LEDON, HIGH);
 
-  uint16_t position = qtr.readLineBlack(sensorValues);
+  uint16_t position = qtr.readLineWhite(sensorValues);
 
   // digitalWrite(LEDON, LOW);
 
