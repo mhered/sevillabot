@@ -17,9 +17,9 @@ class LineFollowerController(Node):
         self.subscription  # prevent unused variable warning
 
         # PID constants
-        self.Kp = 10.0  # Proportional gain
+        self.Kp = 20.0  # Proportional gain
         self.Ki = 0.0  # Integral gain
-        self.Kd = 0.0  # Derivative gain
+        self.Kd = 2.0  # Derivative gain
 
         # linear velocity
         self.linear_vel = 0.1
