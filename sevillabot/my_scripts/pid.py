@@ -44,7 +44,7 @@ class LineFollowerController(Node):
         dt = (time_in_s - self.last_time) if self.last_time else 0
 
         # Error in m
-        error = (msg.data - 3500) * 9.525 / 1000000
+        error = (3500 - msg.data) * 9.525 / 1000000
 
         # Proportional term
         P = self.Kp * error
