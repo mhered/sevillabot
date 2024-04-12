@@ -1,4 +1,8 @@
-# Custom messages
+# Line Follower
+
+## Setup
+
+### Custom messages
 
 1. Create a /msg folder and declare custom message TimestampedData.msg
 
@@ -44,8 +48,6 @@ $ ros2 interface list | grep sevillabot
     sevillabot/msg/TimestampedData
 ```
 
-
-
 Note: For some reason when the node is called from normal terminal it freezes and publishes always the same value:
 
 ```bash
@@ -56,18 +58,14 @@ $ python3 ./src/sevillabot/my_scripts/line_follower_publisher.py
 
 I need to call it from vs_code terminal, and after that it runs well... why? 
 
-
-
-## Testing Line Follower
-
-### Quick Start Guide Gazebo
+## Quick Start Guide for Gazebo
 
 Plug the line follower add-on
 
 Launch  publisher, PID, gazebo, RVIZ and twist_mux
 
 ```bash
-(VSCODE Terminal!!)$ ros2 run sevillabot line_follower_publisher.py 
+(in VSCODE Terminal!!)$ ros2 run sevillabot line_follower_publisher.py 
 
 (PC T1)$ ros2 run sevillabot pid.py 
 
@@ -135,21 +133,43 @@ E:17633	3505
 (bot T4)$ # exit miniterm with CTRL + ] : hack to get line_follower_publisher.py to publish!!
 ```
 
-### Launch the PID
+### Launch the PID node
 
 Warning: put the robot on blocks because soon as you launch this node the robot starts moving. 
 
-We can reuse Terminal 4 from miniterm
+We can reuse Terminal 4 after closing miniterm
 
 ```bash
-(PC T4)$ ros2 run sevillabot pid.py 
+(PC T4)$ ros2 launch sevillabot pid.launch.py 
 ```
 
-It works!
+The advantage of using the launch file instead of running the node directly (`ros2 run sevillabot pid_node.py`) is that the launch file reads the PID gains and linear speed from the YAML file line_follower_pid.yaml. An example that works for speed = 0.1:
+
+```yaml
+line_follower_controller:
+  ros__parameters:
+    Kp: 20.0
+    Ki: 0.0
+    Kd: 2.0
+    linear_vel: 0.1
+```
+
+For 0.15:
+
+```yaml
+line_follower_controller:
+  ros__parameters:
+    Kp: 30.0
+    Ki: 0.0
+    Kd: 3.0
+    linear_vel: 0.15
+```
+
+You can modify the parameters in the file and relaunch the node without the need for recompiling.
 
 ## To do
 
-- [ ] Understand and fix why the `line_follower_publisher.py` node only works when launched from vs_code terminal (??). Seems related to serial communication. Opening and closing miniterm seems to work as well.
-- [ ] modify `pid.py` to read PID constants and linear speed from `line_follower.yaml` -> this will simplify fine tuning
-- [ ] integrate gamepad and twist_mux in the robot launch file `launch_robot.launch.py` this will simplify launching!
+- [ ] Understand and fix why the `line_follower_publisher.py` node only works when launched from vs_code terminal (??) -> Seems related to serial communication. Opening and closing miniterm seems to work as well.
+- [x] modify `pid_node.py` to read PID constants and linear speed from `line_follower_pid.yaml` -> this will simplify fine tuning
+- [ ] integrate gamepad and twist_mux in the robot launch file `launch_robot.launch.py` -> this will simplify launching!
 - [ ] maybe integrate also line_follower_publisher.py and pid.py in a `launch_follower.launch.py`, this will simplify launching!
