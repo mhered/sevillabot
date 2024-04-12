@@ -187,10 +187,6 @@ $ ros2 run nav2_amcl amcl --ros-args -p use_sim_time:=true
 $ ros2 run nav2_util lifecycle_bringup amcl
 ```
 
-## Run SLAM in the robot
-
-
-
 # Navigation
 
 ## Intro
@@ -250,3 +246,17 @@ $ ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true
 
 4. In RVIZ add a new Map, set topic to `/global_costmap/costmap`, set Color Scheme to costmap, turn off the other map.
 5. Set a 2D goal pose. It works!!
+
+## Run SLAM & Navigation in the robot
+
+Install dependencies:
+
+```bash
+$ sudo apt install ros-foxy-slam-toolbox
+$ sudo apt install ros-foxy-navigation2 ros-foxy-nav2-bringup
+$ sudo apt install ros-foxy-twist-mux
+```
+
+git pull to update the repo in the bot
+
+# 
