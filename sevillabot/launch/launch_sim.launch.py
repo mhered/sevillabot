@@ -19,16 +19,15 @@ def generate_launch_description():
     # Check parameter to toggle use of ros2_control
     use_ros2_control = LaunchConfiguration('use_ros2_control')
 
-
     package_name='sevillabot'
 
     # Include the robot_state_publisher launch file
-    # Enabling sim time and passing use_ros2_control parameter
 
     rsp_launch_file_path = os.path.join(
             get_package_share_directory(package_name),'launch','rsp.launch.py'
         )
-        
+
+    # Enabling sim time and passing use_ros2_control parameter        
     rsp = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([rsp_launch_file_path]),
                 launch_arguments={
@@ -36,7 +35,6 @@ def generate_launch_description():
                         'use_ros2_control': use_ros2_control
                     }.items()
         )
-
 
     # Include the Gazebo launch file, provided by the gazebo_ros package
     gazebo_params_path = os.path.join(
@@ -50,8 +48,8 @@ def generate_launch_description():
                     launch_arguments={'extra_gazebo_args': '--ros-args --params-file ' + gazebo_params_path }.items()
     )
 
-    # Run the spawner node from the gazebo_ros package. 
-    # # The entity name doesn't really matter if you only have a single robot.
+    #  spawner node from the gazebo_ros package. 
+    # The entity name doesn't really matter if you only have a single robot.
     spawn_entity = Node(
             package='gazebo_ros', 
             executable='spawn_entity.py',
@@ -59,14 +57,44 @@ def generate_launch_description():
             output='screen',
         )
 
-    # Run the controller manager
+    # include the gamepad launch file
+
+    # YAML file with joystick parameters
+    joystick_launch_file_path = os.path.join(
+                     get_package_share_directory(package_name),'launch',
+                    'joystick.launch.py'
+                )
+    joystick = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([joystick_launch_file_path]), 
+                launch_arguments={'use_sim_time': 'true'}.items()
+    )
+
+    # Include twist_mux launch file
+
+    # YAML file with twist_mux parameters
+    twist_mux_params_file_path = os.path.join(
+            get_package_share_directory(package_name),'config','twist_mux.yaml'
+        )
+    
+    twist_mux = Node(
+        package='twist_mux',
+        executable='twist_mux',
+        name='twist_mux',
+        output='screen',
+        parameters=[twist_mux_params_file_path,{'use_sim_time': True}],
+        # Remap the cmd_vel_out topic from twist_mux to /diff_cont/cmd_vel_unstamped
+        remappings=[('/cmd_vel_out', '/diff_cont/cmd_vel_unstamped')], 
+    )
+
+
+    # Include the controller manager
     diff_drive_spawner = Node(
             package="controller_manager",
             executable="spawner.py",
             arguments=["diff_cont"],
         )
 
-    # Run the joint state broadcaster
+    # Include the joint state broadcaster
     joint_broad_spawner = Node(
             package="controller_manager",
             executable="spawner.py",
@@ -82,6 +110,8 @@ def generate_launch_description():
         rsp,
         gazebo,
         spawn_entity,
+        joystick,
+        twist_mux,
         diff_drive_spawner,
         joint_broad_spawner,
     ])
