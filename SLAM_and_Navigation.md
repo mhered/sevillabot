@@ -249,7 +249,7 @@ $ ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true
 
 ## Run SLAM & Navigation in the robot
 
-Install dependencies:
+### Install slam_toolbox and nav2 dependencies
 
 ```bash
 $ sudo apt install ros-foxy-slam-toolbox
@@ -259,4 +259,61 @@ $ sudo apt install ros-foxy-twist-mux
 
 git pull to update the repo in the bot
 
-# 
+## Setup Lidar LD06 on robot
+
+1. Clone and symlink the repo:
+
+```bash
+(bot):$ cd ~/git
+(bot):$ git clone https://github.com/ldrobotSensorTeam/ldlidar_stl_ros2
+(bot):$ ln -s ~/git/ldlidar_stl_ros2/ ~/robot_ws/src/
+```
+
+2. Plug the LD06 and find out the device id (`by-id` because the path `/dev/ttyUSB*` may change):
+
+```bash
+(bot):$ ls /dev/serial/by-id
+usb-1a86_USB2.0-Ser_-if00-port0
+usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0
+```
+
+Where `usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0` is the LD06 ( and`usb-1a86_USB2.0-Ser_-if00-port0` is the arduino)
+
+3. Set device permissions:
+
+```bash
+(bot):$ sudo chmod 777 /dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0
+```
+
+4. Copy `ldlidar_stl_ros2/launch/ld06.launch.py` over to sevillabot repo, update`package_name` and  `port_name` then build the package and source:
+
+```bash 
+(bot):$ cp ~/robot_ws/src/ldlidar_stl_ros2/launch/ld06.launch.py ~/robot_ws/src/sevillabot/launch/ld06.launch.py
+... # edit file
+(bot):$ cd ~/robot_ws
+(bot):$ colcon build 
+(bot):$ source install/setup.bash
+```
+
+### Quick Start Guide SLAM with robot
+
+Spawn robot, launch gamepad and twist_mux
+
+```bash
+(robot T1):$ ros2 launch sevillabot launch_robot.launch.py
+(robot T2)$ ros2 launch sevillabot joystick.launch.py
+(robot T3):$ ros2 run twist_mux twist_mux --ros-args --params-file ~/robot_ws/src/sevillabot/config/twist_mux.yaml -r cmd_vel_out:=diff_cont/cmd_vel_unstamped
+```
+
+Launch Lidar:
+
+```bash
+(robot T4):$ ros2 launch sevillabot ld06.launch.py
+```
+
+View it from PC with:	
+
+```bash
+(PC):$ rviz2 -d ~/dev_ws/src/sevillabot/config/bot_with_sensors.rviz
+```
+
