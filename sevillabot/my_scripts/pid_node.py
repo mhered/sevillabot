@@ -16,14 +16,28 @@ class LineFollowerController(Node):
         self.publisher = self.create_publisher(Twist, '/cmd_vel_follower', 10)
         self.subscription  # prevent unused variable warning
 
-        # PID constants
-        self.Kp = 20.0  # Proportional gain
-        self.Ki = 0.0  # Integral gain
-        self.Kd = 2.0  # Derivative gain
+        
+        # Declare parameters
+        self.declare_parameter('Kp', 20.0) # Proportional gain
+        self.declare_parameter('Ki', 0.0) # Integral gain
+        self.declare_parameter('Kd', 2.0) # Derivative gain
+        self.declare_parameter('linear_vel', 0.1)  # linear velocity
+        
+        # Load PID constants and linear velocity from parameters
+        self.Kp = self.get_parameter('Kp').get_parameter_value().double_value
+        self.Ki = self.get_parameter('Ki').get_parameter_value().double_value
+        self.Kd = self.get_parameter('Kd').get_parameter_value().double_value
+        self.linear_vel = self.get_parameter('linear_vel').get_parameter_value().double_value
 
-        # linear velocity
-        self.linear_vel = 0.1
 
+        # Log the parameters
+        self.get_logger().info(
+            f'Using Parameters:\n'
+            f'  Kp = {self.Kp}\n'
+            f'  Ki = {self.Ki}\n'
+            f'  Kd = {self.Kd}\n'
+            f'  Linear Velocity = {self.linear_vel}'
+)
         # PID terms initialization
         self.integral = 0
         self.last_error = 0

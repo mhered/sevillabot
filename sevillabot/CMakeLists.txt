@@ -56,7 +56,7 @@ install(
   PROGRAMS 
     my_scripts/joy_subscriber.py  
     my_scripts/line_follower_publisher.py
-    my_scripts/pid.py
+    my_scripts/pid_node.py
   DESTINATION lib/${PROJECT_NAME} 
 )
 ament_package()

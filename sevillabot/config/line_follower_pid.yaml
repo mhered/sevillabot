@@ -1,0 +1,6 @@
+line_follower_controller:
+  ros__parameters:
+    Kp: 30.0
+    Ki: 0.0
+    Kd: 3.0
+    linear_vel: 0.15
