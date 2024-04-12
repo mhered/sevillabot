@@ -44,7 +44,7 @@ def generate_launch_description():
                 )
     joystick = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([joystick_launch_file_path]), 
-                launch_arguments={'use_sim_time': False}.items()
+                launch_arguments={'use_sim_time': 'false'}.items()
     )
 
     # Include twist_mux launch file
