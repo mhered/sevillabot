@@ -36,15 +36,18 @@ mhered@192.168.8.170's password:
 
 Note: After the modification made to the launch file, this now spawns the robot, launches `twist_mux` and launches the gamepad launcher `joystick.launch.py` .
 
+Shortcurt:
+
+```bash
+$ cd ~/sevillabot/commands
+$ . activate_bot.bash
+```
+
 ### Move the robot
 
-#### With a gamepad Logitech F710 from bot (default)
+(**Note: this step is no longer needed, it is already included in the robot launch file**). 
 
-1. Connect gamepad USB dongle to RPi top left USB port (to free reserved ports to Arduinos)
-
-2. Ensure gamepad mode is set to **X** (check switch in front face of gamepad)
-
-3. **Note: this step is no longer needed, it is included in the robot launch file**. To control only robot the base: ssh into RPi, source and launch joystick:
+To control only robot the base: ssh into RPi, source and launch launch gamepad controller:
 
 ```bash
 (PC T2)$ ssh mhered@sevillabot
@@ -55,16 +58,44 @@ mhered@192.168.8.170's password:
 (bot T2)$ ros2 launch sevillabot joystick.launch.py
 ```
 
-
-
-Note: the controls are defined in a parameter file which implements:
+The controls are defined in a parameter file which implements:
 
 - Dead man switches: LB button (left shoulder) for normal speed, RB button (right shoulder) for turbo
 - Control on left stick: vertical axis for forward/backward motion and horizontal axis for rotation.
 
+#### Gamepad Logitech F710 from bot (default)
 
+1. Connect gamepad USB dongle to RPi top left USB port (to free reserved ports to Arduinos)
+2. Ensure gamepad mode is set to **X** (check switch in front face of gamepad)
 
-4. to control also addons, ssh again into RPi, source and launch `joy_subscriber` node:
+#### Binbok wireless from PC
+
+Connect the gamepad to PC in Ubuntu:
+
+* ensure it is charged (or charge with microUSB)
+* to pair press HOME + SHARE (small button labelled 'S' on the left above the cross) until light flashes white (note if you press HOME + 'O' button on the right the white light blinks, not flashes)
+* In Bluetooth settings select Wireless Controller to Connect. Light stops flashing and turns blue
+* You may want to test it works with `$ evtest`
+
+#### With keyboard from PC
+
+This is an alternative (for base robot only) if no gamepad is available. 
+
+Launch keyboard teleop controller in PC:
+
+```bash
+(PC T2)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/cmd_vel_joy
+```
+
+Note remapping of topic `/cmd_vel` to `/cmd_vel_joy` (before was `/diff_cont/cmd_vel_unstamped` but this changed after using `twist_mux`)
+
+Now you can move the robot from computer with the keyboard and see it in RVIZ!
+
+Note: keyboard controls for addons are implemented only partially, see `code/command_claw.py` and `code/command_gun.py`
+
+## Control addons
+
+To control also addons, ssh again into RPi, source and launch `joy_subscriber` node:
 
 ```bash
 (PC T3)$ ssh mhered@sevillabot
@@ -82,38 +113,6 @@ mhered@192.168.8.170's password:
 - For Eco disaster
   - Digital pad LEFT / RIGHT to open and close the claw
 
-### Binbok wireless from PC
-
-Connect the gamepad to PC in Ubuntu:
-
-* ensure it is charged (or charge with microUSB)
-* to pair press HOME + SHARE (small button labelled 'S' on the left above the cross) until light flashes white (note if you press HOME + 'O' button on the right the white light blinks, not flashes)
-* In Bluetooth settings select Wireless Controller to Connect. Light stops flashing and turns blue
-* You may want to test it works with `$ evtest`
-
-Launch gamepad controller:
-
-```bash
-(PC T2)$ ros2 launch sevillabot joystick.launch.py # not anymore needed, included robot launch file 
-(PC T3)$ ros2 launch sevillabot joy_subscriber.py
-```
-
-#### With keyboard from PC
-
-This is an alternative for base robot only if no gamepad is available. 
-
-Launch keyboard teleop controller in PC:
-
-```bash
-(PC T2)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/cmd_vel_joy
-```
-
-Note remapping of topic `/cmd_vel` to `/cmd_vel_joy` (before was `/diff_cont/cmd_vel_unstamped` but this changed after using `twist_mux`)
-
-Now you can move the robot from computer with the keyboard and see it in RVIZ!
-
-Note: keyboard controls for addons are implemented only partially, see `code/command_claw.py` and `code/command_gun.py`
-
 ### Launch RVIZ with config file in the PC
 
 Source ROS2 workspace in PC and launch RVIZ:
@@ -128,7 +127,7 @@ Note we use a predefined config file but it is not necessary
 
 ### Sensors
 
-#### Stream camera to PC
+#### Stream camera images
 
 SSH to the robot from another Terminal and launch the camera controller:
 
@@ -141,6 +140,24 @@ mhered@192.168.8.170's password:
 (bot T4)$ ros2 launch sevillabot camera.launch.py
 ```
 
+#### Stream LiDAR scans
+
+Launch the LIDAR controller:
+
+```bash
+(bot T5)$ cd ~/robot_ws/
+(bot T5)$ source install/setup.bash
+(bot T5)$ ros2 launch sevillabot ld06.launch.py 
+```
+
+#### Monitor from PC
+
+RVIZ shows LiDAR. Try Orthographic View.
+
+```bash
+(PC T6)$ rviz2 -d ~/dev_ws/src/sevillabot/config/bot_with_sensors.rviz
+```
+
 In RVIZ Add Camera and select topic `/image_raw/compressed`
 
 It does not show the camera feed in RVIZ as it should... BUT it works with RQT:
@@ -151,15 +168,7 @@ It does not show the camera feed in RVIZ as it should... BUT it works with RQT:
 (PC T6)$ ros2 run rqt_image_view rqt_image_view
 ```
 
-#### Stream Lidar scans
-
-Launch the LIDAR controller:
-
-```bash
-(bot T5)$ cd ~/robot_ws/
-(bot T5)$ source install/setup.bash
-(bot T5)$ ros2 launch sevillabot ld06.launch.py 
-```
+#### 
 
 ## Power off sevillabot
 
