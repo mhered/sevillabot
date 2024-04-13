@@ -14,7 +14,7 @@ Balance charging the LiPo battery using the iMAX B6AC LiPo balance charger:
 6.  Select **LiPo** battery type. 
 7. Confirm settings. For the 5000mAh 11.1V 50C LiPo battery: **Lipo**,  **3.8A** charging current (below 1C) and **11.1V (3S)** configuration. 
 8.  Hold the **Start** button to start. Press it again to confirm. 
-9. During charging: in the screen with 6 voltages it is normal to see the lower three indications static at 0.00. This is because the charger is capable of charging batteries with up to 6 cells, but our battery actually has only three.
+9. During charging: use arrows to move to the screen with 6 voltages. It is normal to see the lower three indications static at 0.00. This is because the charger is capable of charging batteries with up to 6 cells, but our battery actually has only three.
 10. The charger alarm will beep when charge is complete
 
 ### Switch on the robot
