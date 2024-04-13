@@ -14,7 +14,7 @@ Balance charging the LiPo battery using the iMAX B6AC LiPo balance charger:
 6.  Select **LiPo** battery type. 
 7. Confirm settings. For the 5000mAh 11.1V 50C LiPo battery: **Lipo**,  **3.8A** charging current (below 1C) and **11.1V (3S)** configuration. 
 8.  Hold the **Start** button to start. Press it again to confirm. 
-9. During charging: in the screen with 6 voltages it is normal to see the lower three indications static at 0.00. This is because the charger is capable of charging batteries with up to 6 cells, but our battery actually has only three.
+9. During charging: use arrows to move to the screen with 6 voltages. It is normal to see the lower three indications static at 0.00. This is because the charger is capable of charging batteries with up to 6 cells, but our battery actually has only three.
 10. The charger alarm will beep when charge is complete
 
 ### Switch on the robot
@@ -34,29 +34,17 @@ mhered@192.168.8.170's password:
 (bot T1)$ ros2 launch sevillabot launch_robot.launch.py
 ```
 
+Note: After the modification made to the launch file, this now spawns the robot, launches `twist_mux` and launches the gamepad launcher `joystick.launch.py` .
+
 ### Move the robot
 
-#### With keyboard from PC
-
-Launch keyboard teleop controller in PC:
-
-```bash
-(PC T2)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
-```
-
-Note remapping of topic `/cmd_vel` to `/diff_cont/cmd_vel_unstamped`
-
-Now you can move the robot from computer with the keyboard and see it in RVIZ!
-
-#### With a gamepad
-
-##### Using Logitech F710 from bot
+#### With a gamepad Logitech F710 from bot (default)
 
 1. Connect gamepad USB dongle to RPi top left USB port (to free reserved ports to Arduinos)
 
 2. Ensure gamepad mode is set to **X** (check switch in front face of gamepad)
 
-3. to control only robot base ssh into RPi, source and launch joystick:
+3. **Note: this step is no longer needed, it is included in the robot launch file**. To control only robot the base: ssh into RPi, source and launch joystick:
 
 ```bash
 (PC T2)$ ssh mhered@sevillabot
@@ -67,12 +55,16 @@ mhered@192.168.8.170's password:
 (bot T2)$ ros2 launch sevillabot joystick.launch.py
 ```
 
+
+
 Note: the controls are defined in a parameter file which implements:
 
 - Dead man switches: LB button (left shoulder) for normal speed, RB button (right shoulder) for turbo
 - Control on left stick: vertical axis for forward/backward motion and horizontal axis for rotation.
 
-4. to control addons, ssh again into RPi, source and launch `joy_subscriber` node:
+
+
+4. to control also addons, ssh again into RPi, source and launch `joy_subscriber` node:
 
 ```bash
 (PC T3)$ ssh mhered@sevillabot
@@ -90,7 +82,7 @@ mhered@192.168.8.170's password:
 - For Eco disaster
   - Digital pad LEFT / RIGHT to open and close the claw
 
-##### Binbok wireless from PC
+### Binbok wireless from PC
 
 Connect the gamepad to PC in Ubuntu:
 
@@ -102,11 +94,25 @@ Connect the gamepad to PC in Ubuntu:
 Launch gamepad controller:
 
 ```bash
-(PC T2)$ ros2 launch sevillabot joystick.launch.py
+(PC T2)$ ros2 launch sevillabot joystick.launch.py # not anymore needed, included robot launch file 
 (PC T3)$ ros2 launch sevillabot joy_subscriber.py
 ```
 
-##### 
+#### With keyboard from PC
+
+This is an alternative for base robot only if no gamepad is available. 
+
+Launch keyboard teleop controller in PC:
+
+```bash
+(PC T2)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/cmd_vel_joy
+```
+
+Note remapping of topic `/cmd_vel` to `/cmd_vel_joy` (before was `/diff_cont/cmd_vel_unstamped` but this changed after using `twist_mux`)
+
+Now you can move the robot from computer with the keyboard and see it in RVIZ!
+
+Note: keyboard controls for addons are implemented only partially, see `code/command_claw.py` and `code/command_gun.py`
 
 ### Launch RVIZ with config file in the PC
 
@@ -122,7 +128,7 @@ Note we use a predefined config file but it is not necessary
 
 ### Sensors
 
-#### Stream camera
+#### Stream camera to PC
 
 SSH to the robot from another Terminal and launch the camera controller:
 
@@ -152,7 +158,7 @@ Launch the LIDAR controller:
 ```bash
 (bot T5)$ cd ~/robot_ws/
 (bot T5)$ source install/setup.bash
-(bot T5)$ ros2 launch ldlidar_stl_ros2 ld06.launch.py 
+(bot T5)$ ros2 launch sevillabot ld06.launch.py 
 ```
 
 ## Power off sevillabot
@@ -180,11 +186,13 @@ See implementation in file `safe_shutdown.py` in: [](/home/mhered/manolobot/code
 ## To Do
 
 - [x] copy code over to sevillabot and update calls
-- [ ] calibrate for sevillabot robot dimensions
-- [ ] move left-right to right joystick
-- [ ] add photos / video of battery charging
+- [ ] ** calibrate for sevillabot robot dimensions
+- [ ] ** optimize controls. e.g. move left-right to right joystick?
+- [ ] ** integrate `joy_subscriber` in the joystick launch file to control gun and clamp addons ??
+- [ ] ** read addon controls from the `joystick.yaml` param file 
 
+- [ ] add photos / video of battery charging
 - [ ] fix issue with camera in RVIZ
-- [ ] make power down more usable (remove short press for reset and provide feedback for shutdown)
+- [ ] implement power down button making it more usable (remove short press for reset and provide feedback for shutdown)
 - [ ] wheels skid, big time
 - [ ] motors have a lot of hysteresis

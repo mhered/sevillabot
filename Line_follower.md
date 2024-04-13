@@ -170,6 +170,6 @@ You can modify the parameters in the file and relaunch the node without the need
 ## To do
 
 - [ ] Understand and fix why the `line_follower_publisher.py` node only works when launched from vs_code terminal (??) -> Seems related to serial communication. Opening and closing miniterm seems to work as well.
-- [x] modify `pid_node.py` to read PID constants and linear speed from `line_follower_pid.yaml` -> this will simplify fine tuning
-- [ ] integrate gamepad and twist_mux in the robot launch file `launch_robot.launch.py` -> this will simplify launching!
-- [ ] maybe integrate also line_follower_publisher.py and pid.py in a `launch_follower.launch.py`, this will simplify launching!
+- [x] modify `pid_node.py` to read PID constants and linear speed from `line_follower_pid.yaml` -> this will simplify fine tuning Done 11/04/24
+- [x] integrate gamepad and twist_mux in the robot launch file `launch_robot.launch.py` -> this will simplify launching! DONE 13/04/24
+- [ ] maybe try to integrate also line_follower_publisher.py and pid.py in a `launch_follower.launch.py`, this will simplify launching, and may fix the issue with serial!
