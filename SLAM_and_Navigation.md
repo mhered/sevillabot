@@ -77,7 +77,7 @@ Launch also rviz:
 (PC T2)$ rviz2 -d ~/dev_ws/src/sevillabot/config/bot_with_sensors.rviz
 ```
 
-Launch teleop (better to do with gamepad):
+Launch teleop (would be better with gamepad if available):
 
 ```bash
 (PC T3)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
@@ -96,7 +96,7 @@ In RVIZ:
 * change the Fixed Frame from odom to map (this to have the map steady)
 * save RVIZ config to `slam_gazebo.rviz`
 
-## Quick Start Guide
+## Quick Start Guide SLAM on PC with keyboard
 
 ```bash
 (PC T1)$ ros2 launch sevillabot launch_sim.launch.py world:=~/dev_ws/src/sevillabot/worlds/obstacles.world
@@ -107,6 +107,10 @@ In RVIZ:
 
 (PC T4)$ ros2 run teleop_twist_keyboard teleop_twist_keyboard --ros-args -r /cmd_vel:=/diff_cont/cmd_vel_unstamped
 ```
+
+Note: the above is now obsolete due to use of twist_mux
+
+
 
 ## Creating a map
 
@@ -135,7 +139,7 @@ To save the map:
 
 ## Using a map
 
-Close everything an reopen
+Close everything and reopen
 
 Modify config file `mapper_params_online_async.yaml`: set mode to localization, declare map full path without extension and set start at dock 
 
@@ -247,9 +251,9 @@ $ ros2 launch nav2_bringup navigation_launch.py use_sim_time:=true
 4. In RVIZ add a new Map, set topic to `/global_costmap/costmap`, set Color Scheme to costmap, turn off the other map.
 5. Set a 2D goal pose. It works!!
 
-## Run SLAM & Navigation in the robot
+# Run SLAM & Navigation in the robot
 
-### Install slam_toolbox and nav2 dependencies
+## Install slam_toolbox and nav2 dependencies
 
 ```bash
 $ sudo apt install ros-foxy-slam-toolbox
@@ -295,20 +299,18 @@ Where `usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0` is
 (bot):$ source install/setup.bash
 ```
 
-### Quick Start Guide SLAM with robot
+## Quick Start Guide robot with sensors
 
-Spawn robot, launch gamepad and twist_mux
+Updated `launch_robot.launch.py`and `launch_sim.launch.py` to spawn robot, launch gamepad and twist_mux with a single command
 
 ```bash
-(robot T1):$ ros2 launch sevillabot launch_robot.launch.py
-(robot T2)$ ros2 launch sevillabot joystick.launch.py
-(robot T3):$ ros2 run twist_mux twist_mux --ros-args --params-file ~/robot_ws/src/sevillabot/config/twist_mux.yaml -r cmd_vel_out:=diff_cont/cmd_vel_unstamped
+(robot T1):$ ros2 launch sevillabot launch_robot.launch.py #spawns robot, launches gamepad and twist_mux
 ```
 
 Launch Lidar:
 
 ```bash
-(robot T4):$ ros2 launch sevillabot ld06.launch.py
+(robot T2):$ ros2 launch sevillabot ld06.launch.py
 ```
 
 View it from PC with:	
