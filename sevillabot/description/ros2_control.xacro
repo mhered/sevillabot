@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro">
 
-<!-- param device assumes the Robot base Arduino is plugged in the top-right USB port of the RPi -->
+<!-- param device assumes the Mega4 is plugged in the top-right USB port of the RPi and the Robot base Arduino on the center USB port of the Mega4-->
 
 <!-- use sim_mode parameter to toggle between real robot and gazebo -->
 
@@ -12,7 +12,7 @@
                 <param name="left_wheel_name">left_wheel_joint</param>
                 <param name="right_wheel_name">right_wheel_joint</param>
                 <param name="loop_rate">30</param>
-                <param name="device">/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.1:1.0-port0</param>
+                <param name="device">/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.2:1.0-port0</param>
                 <param name="baud_rate">57600</param>
                 <param name="timeout">1000</param>
                 <param name="enc_counts_per_rev">1975</param>
