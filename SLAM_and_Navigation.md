@@ -301,7 +301,7 @@ Where `usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0` is
 
 ## Quick Start Guide robot with sensors
 
-Updated `launch_robot.launch.py`and `launch_sim.launch.py` to spawn robot, launch gamepad and twist_mux with a single command
+13/04/24 Updated `launch_robot.launch.py`and `launch_sim.launch.py` to spawn robot, launch gamepad and twist_mux with a single command
 
 ```bash
 (robot T1):$ ros2 launch sevillabot launch_robot.launch.py #spawns robot, launches gamepad and twist_mux
