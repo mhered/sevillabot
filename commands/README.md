@@ -1,7 +1,9 @@
-# README.md
-This folder contains shortcut commands to interact with sevillabot. 
+# /commands/README.md
+This folder contains bash commands to be used as shortcuts to interact with sevillabot. 
 
-Open a terminal in this folder and launch commands. Each command opens a separate terminal.
+Open a terminal in this folder and launch commands. 
+
+Each command opens a separate terminal.
 
 ## Shortcuts for frequent remote commands in bot
 
@@ -22,6 +24,8 @@ Open a terminal in this folder and launch commands. Each command opens a separat
 | --------------------- | ------------------------------------------------------------ | -------------------------------------------- |
 | `$ . RVIZ.bash`       | `$ rviz2 -d ~/dev_ws/src/sevillabot/config/bot_with_sensors.rviz` | Launches RVIZ with config file to view Lidar |
 | `$ . view_image.bash` | `$ cd ~/dev_ws`<br />`$ source install/setup.bash`<br />` $ ros2 launch sevillabot camera.launch.py` | Launches RQT Image viewer                    |
+
+
 
 ## Sources
 
