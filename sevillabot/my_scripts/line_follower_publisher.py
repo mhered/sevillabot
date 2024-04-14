@@ -13,7 +13,8 @@ class LineFollowerNode(Node):
         self.serial_port = serial.Serial(
             # PC config assuming this is the serial assigned 
             # '/dev/ttyUSB0',
-            # Robot config assuming the Addon Arduino is plugged in the bottom-left USB port of the RPi (cable too short!! )
+            # Robot config assumes the Addon Arduino is plugged in the bottom-left USB port of the RPi
+            # and the Mega4 is plugged in the bottom-right USB port of the RPi
             '/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.4:1.0-port0',
             9600, 
             timeout=1)  # Adjust port and baud rate as needed
