@@ -13,10 +13,13 @@ class JoySubscriberNode:
         self.X_button_prev_state = 0  # Previous state of X button (laser)
         self.Y_button_prev_state = 0  # Previous state of Y button (trigger)
         self.waiting_for_arduino = False  # Flag to indicate if arduino is busy
+
+        # assumes the Mega4 is plugged in the bottom-right USB port of the RPi
+        # and the Addon Arduino is plugged in side USB port of the Mega4 
+        arduinoPort = '/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.4:1.0-port0'
+        
         self.serial_port = serial.Serial(
-            # assumes the Addon Arduino is plugged in the bottom-left USB port of the RPi
-            # and the Mega4 is plugged in the bottom-right USB port of the RPi
-            '/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.4:1.0-port0',
+            arduinoPort,
             9600, 
             timeout=1)  # Adjust port and baud rate as needed
         print('Serial port opened')
