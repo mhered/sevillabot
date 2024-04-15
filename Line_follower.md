@@ -85,13 +85,28 @@ When moving the sensor away from the line the robot turns to counter the error!!
 
 Currently requires three calls, each of which requires to ssh into sevillabot, `cd ~/robot_ws`, `source install/setup.bash`. I should combine these three in a single launch file.
 
-```
+```bash
 (bot T1)$ ros2 launch sevillabot launch_robot.launch.py # launch robot
 
 (bot T2)$ ros2 launch sevillabot joystick.launch.py # launch gamepad
 
 (bot T3)$ ros2 run twist_mux twist_mux --ros-args --params-file ~/robot_ws/src/sevillabot/config/twist_mux.yaml -r cmd_vel_out:=diff_cont/cmd_vel_unstamped # launch twist_mux
 ```
+
+After modifying robot_launch, the three calls no longer necessary:
+
+```bash
+(bot T1)$ ros2 launch sevillabot launch_robot.launch.py # launch robot, gamepad & twist_mux
+```
+
+Equivalent to the shortcut:
+
+```bash
+(PC)$ cd sevillabot/commands/
+(PC)$ . activate_bot.bash
+```
+
+
 
 ### Launch the subscriber
 
@@ -166,6 +181,30 @@ line_follower_controller:
 ```
 
 You can modify the parameters in the file and relaunch the node without the need for recompiling.
+
+After modifying the distance between wheels the above parameters don't work anymore.
+
+An example that works for speed = 0.1 (with wheels @ 225mm instead of 275)
+
+```yaml
+line_follower_controller:
+  ros__parameters:
+    Kp: 15.0
+    Ki: 0.0
+    Kd: 0.0
+    linear_vel: 0.1
+```
+
+## Quick Start Guide Lini Follower with shortcuts
+
+```bash
+$ . activate_bot.bash # spawn bot
+$ . miniterm.bash # launch miniterm
+$ . line_sensor.bash # launch line_sensor subscriber. Close miniterrm to activate it
+$ . pid.bash # launch PID to start moving
+```
+
+
 
 ## To do
 
