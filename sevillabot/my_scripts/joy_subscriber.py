@@ -15,9 +15,11 @@ class JoySubscriberNode:
         self.waiting_for_arduino = False  # Flag to indicate if arduino is busy
 
         # assumes the Mega4 is plugged in the bottom-right USB port of the RPi
-        # and the Addon Arduino is plugged in side USB port of the Mega4 
+        # and the Addon Arduino is plugged in left USB port of the Mega4 (micro USB)
+        # arduinoPort = '/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.3:1.0-port0'
+        # and the Addon Arduino is plugged in side USB port of the Mega4 (mini USB)
         arduinoPort = '/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.4:1.0-port0'
-        
+           
         self.serial_port = serial.Serial(
             arduinoPort,
             9600, 
