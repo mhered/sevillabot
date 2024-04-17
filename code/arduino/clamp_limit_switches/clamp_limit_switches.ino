@@ -74,7 +74,16 @@ void loop() {
   // wait for command over Serial
   myCmd = Serial.readStringUntil('\r');
 
+
+  LimOpenRead = digitalRead(LIM_OPEN_PIN);
+  LimCloseRead = digitalRead(LIM_CLOSE_PIN);
+  Serial.print("Open Switch is ");
+  Serial.print(LimOpenRead);
+  Serial.print(" Close Switch is ");
+  Serial.println(LimCloseRead);
+
   if (myCmd == "OPEN") {
+
     if (digitalRead(LIM_OPEN_PIN) == LOW ) {
       Serial.println("OPEN_SUCCESS");
       // incremental open movement
