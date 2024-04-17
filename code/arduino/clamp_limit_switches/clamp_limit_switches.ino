@@ -76,7 +76,7 @@ void loop() {
 
   if (myCmd == "OPEN") {
     if (digitalRead(LIM_OPEN_PIN) == LOW ) {
-      Serial.println("opening");
+      Serial.println("OPEN_SUCCESS");
       // incremental open movement
       pitch_stepper.setSpeed(RPM);
       pitch_stepper.step(STEP);
@@ -84,7 +84,7 @@ void loop() {
       Serial.println("Reached opening limit");
   } else if (myCmd == "CLOSE") {
     if (digitalRead(LIM_CLOSE_PIN) == LOW) {
-      Serial.println("closing");
+      Serial.println("CLOSE_SUCCESS");
       // incremental close movement
       pitch_stepper.setSpeed(RPM);
       pitch_stepper.step(-STEP);
