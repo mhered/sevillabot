@@ -140,7 +140,7 @@ class JoySubscriberNode:
             command = "CLOSE"
         if not self.waiting_for_arduino and command != "":
             self.send_message_arduino(command)
-            self.node.get_logger().info("Adjusting Vertical Aim " + command)
+            self.node.get_logger().info("Moving Clamp " + command)
 
         self.Y_button_prev_state = Y_button_state
         self.X_button_prev_state = X_button_state
