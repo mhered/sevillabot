@@ -122,12 +122,12 @@ Note: the stepper motor just waiting consumes ~0.25A*12V = 3W!! And it gets hot!
 
 --
 
-After installing the Mega, the addresses by-id and by-path change:
+After installing the Mega, the addresses `by-id` remain unchanged, but `by-path `addresses change:
 
-| Mega4 USB port position (when plugged on top-right RPi USB port) | `/dev/serial/by-path/*` address                              | `/dev/serial/by-id/*` address                                |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| left: LiDAR                                                  | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.2:1.0-port0` | `/dev/serial/by-id/usb-Silicon_Labs_CP2102_USB_to_UART_Bridge_Controller_0001-if00-port0` |
-| center: robot base Arduino                                   | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.3:1.0-port0` | `/dev/serial/by-id/usb-1a86_USB2.0-Ser_-if00-port0`          |
-| right: gamepad dongle                                        | NA                                                           | NA                                                           |
-| side: not accessible due to buck converter                   | NA                                                           | NA                                                           |
+| Mega4 USB port position (when plugged on top-right RPi USB port) | `/dev/serial/by-path/*` address                              |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| left: Addon Arduino microUSB, ej. LiDAR, gun                 | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.3:1.0-port0` |
+| center: gamepad dongle                                       | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.2:1.0-port0` |
+| right: robot base Arduino                                    | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.1:1.0-port0` |
+| side: Addon Arduino miniUSB ej.  clamp,  line follower       | `/dev/serial/by-path/platform-fd500000.pcie-pci-0000:01:00.0-usb-0:1.2.4:1.0-port0` |
 
