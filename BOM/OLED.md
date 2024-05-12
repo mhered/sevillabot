@@ -41,8 +41,7 @@ void setup() {
   Serial.begin(9600);
 
   // initialize screen
-  // SSD1306_SWITCHCAPVCC to generat
-    e internally 3.3V to power the display or SSD1306_EXTERNALVCC to power it externally
+  // SSD1306_SWITCHCAPVCC to generate internally 3.3V to power the display or SSD1306_EXTERNALVCC to power it externally
   if (!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
     Serial.println(F("SSD1306 allocation failed"));
     for (;;); // Loop forever
