@@ -195,11 +195,17 @@ See implementation in file `safe_shutdown.py` in: [](/home/mhered/manolobot/code
 ## To Do
 
 - [x] copy code over to sevillabot and update calls
-- [ ] ** calibrate for sevillabot robot dimensions
+
+ISSUES CREATED
+
+* ** calibrate for sevillabot robot dimensions
+
+* ** read addon controls from the `joystick.yaml` param file 
+
+
+
 - [ ] ** optimize controls. e.g. move left-right to right joystick?
 - [ ] ** integrate `joy_subscriber` in the joystick launch file to control gun and clamp addons ??
-- [ ] ** read addon controls from the `joystick.yaml` param file 
-
 - [ ] add photos / video of battery charging
 - [ ] fix issue with camera in RVIZ
 - [ ] implement power down button making it more usable (remove short press for reset and provide feedback for shutdown)

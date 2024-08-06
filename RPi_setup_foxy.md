@@ -244,7 +244,7 @@ I can survive with the gamepad connected to the PC for the moment, but like to c
 To do:
 
 - [ ] try pairing the gamepad in the GUI (not practical, but useful for troubleshooting purposes)
-- [ ] Josh recommends wireless with dongle as it is easier to pair than bluetooth... Just ordered it.
+- [x] Josh recommends wireless with dongle as it is easier to pair than bluetooth... Just ordered it.
 
 ## Moving the robot
 
