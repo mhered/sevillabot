@@ -35,3 +35,5 @@ Check out this one too if need to send variables: https://malcontentcomics.com/s
 Check this article for ways to launch several terminals or tabs with different titles: https://www.baeldung.com/linux/gui-open-terminals-run-commands
 
 Check this article for ways to concatenate commands: https://unix.stackexchange.com/questions/159489/is-there-a-difference-between-and-and
+
+Check this one for ways to avoid writing the password (e.g. for sudo commands?): [How to automate SSH login with password?](https://serverfault.com/questions/241588/how-to-automate-ssh-login-with-password)
