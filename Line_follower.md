@@ -195,7 +195,7 @@ line_follower_controller:
     linear_vel: 0.1
 ```
 
-## Quick Start Guide Lini Follower with shortcuts
+## Quick Start Guide Line Follower with shortcuts
 
 ```bash
 $ . activate_bot.bash # spawn bot
