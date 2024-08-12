@@ -2,9 +2,7 @@
 
 Note: kept L298N jumper on instead of piggybacking 5V from Arduino
 
-Buck converter image not updated
-
-![](./assets/wiring_diagram.png)
+![](./assets/wiring_diagram_2.png)
 
 | L298 | Arduino | Motor                  | Color  |
 | ---- | ------- | ---------------------- | ------ |
