@@ -37,9 +37,10 @@
     <link name="chassis_link">
         <visual>
             <geometry>
-                <box size="${box_x} ${box_y} ${box_z}" />
+            	<mesh filename="file://$(find sevillabot)/meshes/ASSY_sevillabot_base.stl" scale="1.0e-3 1.0e-3 1.0e-3"/>
+                <!-- box size="${box_x} ${box_y} ${box_z}" /> -->
             </geometry>
-            <origin xyz="${box_x/2} 0 ${box_z/2}" />
+            <origin xyz="${box_x/2} 0 0" rpy="0 0 -${pi/2}"/>
             <material name="white" />
         </visual>
 
@@ -126,15 +127,15 @@
         <material>Gazebo/Blue</material>
     </gazebo>
 
-    <!-- LEFT CASTER WHEEL LINK -->
+    <!-- CASTER WHEEL LINK -->
 
-    <joint name="left_caster_wheel_joint" type="fixed">
+    <joint name="caster_wheel_joint" type="fixed">
         <parent link="chassis_link" />
-        <child link="left_caster_wheel_link" />
-        <origin xyz="${box_x-c_x} ${box_y/2-c_y} ${-c_z}" />
+        <child link="caster_wheel_link" />
+        <origin xyz="${box_x-c_x} 0 ${-c_z}" />
     </joint>
 
-    <link name="left_caster_wheel_link">
+    <link name="caster_wheel_link">
         <visual>
             <geometry>
                 <sphere radius="${c_D/2}" />
@@ -154,129 +155,11 @@
 
     </link>
 
-    <gazebo reference="left_caster_wheel_link">
+    <gazebo reference="caster_wheel_link">
         <material>Gazebo/Yellow</material>
         <mu1 value="0.0001" />
         <mu2 value="0.0001" />
     </gazebo>
 
-
-    <!-- RIGHT CASTER WHEEL LINK     -->
-
-    <joint name="right_caster_wheel_joint" type="fixed">
-        <parent link="chassis_link" />
-        <child link="right_caster_wheel_link" />
-        <origin xyz="${box_x-c_x} ${-box_y/2+c_y} ${-c_z}" />
-    </joint>
-
-    <link name="right_caster_wheel_link">
-        <visual>
-            <geometry>
-                <sphere radius="${c_D/2}" />
-            </geometry>
-            <material name="yellow" />
-        </visual>
-
-        <collision>
-            <geometry>
-                <sphere radius="${c_D/2}" />
-            </geometry>
-        </collision>
-
-        <xacro:inertial_sphere mass="${c_mass}" radius="${c_D/2}">
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </xacro:inertial_sphere>
-
-    </link>
-
-    <gazebo reference="right_caster_wheel_link">
-        <material>Gazebo/Yellow</material>
-        <mu1 value="0.0001" />
-        <mu2 value="0.0001" />
-    </gazebo>
-
-
-    <!-- LEFT MOTOR LINK -->
-
-    <joint name="left_motor_joint" type="fixed">
-        <parent link="base_link" />
-        <child link="left_motor_link" />
-        <origin xyz="0 ${m_y+m_h/2} 0" rpy="-${pi/2} 0 0" />
-    </joint>
-
-    <link name="left_motor_link">
-        <visual>
-            <geometry>
-                <cylinder radius="${m_D/2}" length="${m_h}" />
-            </geometry>
-            <origin xyz="0 0 0" />
-            <material name="red" />
-        </visual>
-
-        <visual>
-            <geometry>
-                <cylinder radius="${m_d/2}" length="${m_l}" />
-            </geometry>
-            <origin xyz="0 0 ${(m_h+m_l)/2}" />
-            <material name="red" />
-        </visual>
-
-        <collision>
-            <geometry>
-                <cylinder radius="${m_D/2}" length="${m_h}" />
-            </geometry>
-        </collision>
-
-        <xacro:inertial_cylinder mass="${m_mass}" radius="${m_D/2}" length="${m_h}">
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </xacro:inertial_cylinder>
-
-    </link>
-
-    <gazebo reference="left_motor_link">
-        <material>Gazebo/Red</material>
-    </gazebo>
-
-
-    <!-- RIGHT MOTOR LINK -->
-
-    <joint name="right_motor_joint" type="fixed">
-        <parent link="base_link" />
-        <child link="right_motor_link" />
-        <origin xyz="0 -${m_y+m_h/2} 0" rpy="${pi/2} 0 0" />
-    </joint>
-
-    <link name="right_motor_link">
-        <visual>
-            <geometry>
-                <cylinder radius="${m_D/2}" length="${m_h}" />
-            </geometry>
-            <origin xyz="0 0 0" />
-            <material name="red" />
-        </visual>
-
-        <visual>
-            <geometry>
-                <cylinder radius="${m_d/2}" length="${m_l}" />
-            </geometry>
-            <origin xyz="0 0 ${(m_h+m_l)/2}" />
-            <material name="red" />
-        </visual>
-
-        <collision>
-            <geometry>
-                <cylinder radius="${m_D/2}" length="${m_h}" />
-            </geometry>
-        </collision>
-
-        <xacro:inertial_cylinder mass="${m_mass}" radius="${m_D/2}" length="${m_h}">
-            <origin xyz="0 0 0" rpy="0 0 0" />
-        </xacro:inertial_cylinder>
-
-    </link>
-
-    <gazebo reference="right_motor_link">
-        <material>Gazebo/Red</material>
-    </gazebo>
 
 </robot>
