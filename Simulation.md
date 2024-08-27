@@ -4,20 +4,38 @@ Spawn the robot
 
 
 ```bash
+$ cd ~/dev_ws/
+$ source install/setup.bash
 $ ros2 launch sevillabot rsp.launch.py use_sim_time:=true
 ```
 
 Launch gazebo
 
 ```bash
+$ cd ~/dev_ws/
+$ source install/setup.bash
 $ ros2 launch sevillabot launch_sim.launch.py
 ```
+
+<img src="./assets/sevillabot_in_Gazebo.png" style="zoom: 33%;" />
 
 Teleop with keyboard
 
 ```bash
+$ cd ~/dev_ws/
+$ source install/setup.bash
 $ ros2 run teleop_twist_keyboard teleop_twist_keyboard
 ```
+
+Display in RVIZ
+
+```bash
+$ cd ~/dev_ws/
+$ source install/setup.bash
+$ ros2 launch sevillabot display.launch.py
+```
+
+<img src="./assets/sevillabot_in_RVIZ.png" style="zoom: 33%;" />
 
 ## Exporting a FreeCAD assembly to STL
 
@@ -47,10 +65,10 @@ Note: need to scale when importing (FreeCAD units are mm, Gazebo units are m)
 
 ## To Do
 
-- [ ] add wheels mesh
-- [ ] add castor mesh
-- [ ] align height of castor
+- [x] add wheels mesh
+- [x] add caster mesh
+- [x] align height of caster
+- [x] measure and correct position of wheels
 - [ ] is collision between wheels and chassis a problem?
 - [ ] adjust angle of lidar
-- [ ] measure and correct position of wheels
-- [ ] measure and correct CoGs, masses, inertias, 
+- [ ] measure and correct CoGs, masses, inertias
