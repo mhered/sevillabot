@@ -4,14 +4,15 @@
     <joint name="lidar_joint" type="fixed">
         <parent link="chassis_link"/>
         <child link="lidar_link"/>
-        <origin xyz="${box_x/2 + L_x} 0 ${box_z + L_z}" rpy="0.0 0.0 0.0"/>
+        <origin xyz="${L_x+L_x_off} 0 ${L_z+L_z_off}" rpy="0.0 0.0 0.0"/>
     </joint>
 
     <link name="lidar_link">
         <visual>
             <geometry>
-                <cylinder radius="${L_D/2}" length="${L_h}" />
+                <mesh filename="file://$(find sevillabot)/meshes/ADDON_Lidar_assy.stl" scale="1.0e-3 1.0e-3 1.0e-3"/>
             </geometry>
+            <origin xyz="${-L_x_off} 0 ${-L_z_off}" rpy="0.0 0.0 0.0"/>
             <material name="green" />
         </visual>
 
@@ -19,6 +20,7 @@
             <geometry>
                 <cylinder radius="${L_D/2}" length="${L_h}" />
             </geometry>
+            <origin xyz="0 0 0" rpy="0 0 0" />
         </collision> 
 
         <xacro:inertial_cylinder mass="${L_mass}" radius="${L_D/2}" length="${L_h}">

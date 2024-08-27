@@ -4,15 +4,15 @@
     <joint name="camera_joint" type="fixed">
         <parent link="chassis_link"/>
         <child link="camera_link"/>
-        <origin xyz="${box_x + cam_x} 0 ${box_z + cam_z}" rpy="0.0 ${cam_angle} 0.0"/>
+        <origin xyz="${cam_x} 0 ${cam_z}" rpy="0.0 ${cam_angle} 0.0"/>
     </joint>
 
     <link name="camera_link">
         <visual>
             <geometry>
-                <box size="${cam_dx} ${cam_dy} ${cam_dz}"/>
+                <mesh filename="file://$(find sevillabot)/meshes/ADDON_front_camera.stl" scale="1.0e-3 1.0e-3 1.0e-3"/>
             </geometry>
-            <origin xyz="${cam_dx/2} 0 ${cam_dz/2}" />
+            <origin xyz="0 0 0" rpy="0.0 0.0 0.0"/>
             <material name="orange" />
         </visual>
 
@@ -20,11 +20,11 @@
             <geometry>
                 <box size="${cam_dx} ${cam_dy} ${cam_dz}"/>
             </geometry>
-            <origin xyz="${cam_dx/2} 0 ${cam_dz/2}" />
+            <origin xyz="0.0 0.0 0.0" />
         </collision>
 
         <xacro:inertial_box mass="${cam_mass}" x="${cam_dx}" y="${cam_dy}" z="${cam_dz}">
-            <origin xyz="${cam_dx/2} 0 ${cam_dz/2}" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
         </xacro:inertial_box>
 
     </link>

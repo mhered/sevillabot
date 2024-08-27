@@ -13,7 +13,7 @@
     <!-- BASE LINK -->
 
     <link name="base_link">
-    </link>
+    </link>length
 
     <!-- BASE_FOOTPRINT LINK -->
     
@@ -31,16 +31,15 @@
     <joint name="chassis_joint" type="fixed">
         <parent link="base_link" />
         <child link="chassis_link" />
-        <origin xyz="${W_x-box_x/2} 0 ${W_z}" />
+        <origin xyz="0 0 0" />
     </joint>
 
     <link name="chassis_link">
         <visual>
             <geometry>
             	<mesh filename="file://$(find sevillabot)/meshes/ASSY_sevillabot_base.stl" scale="1.0e-3 1.0e-3 1.0e-3"/>
-                <!-- box size="${box_x} ${box_y} ${box_z}" /> -->
             </geometry>
-            <origin xyz="${box_x/2} 0 0" rpy="0 0 -${pi/2}"/>
+            <origin xyz="${box_z_off} 0 ${box_z_off}" rpy="0 0 0"/>
             <material name="white" />
         </visual>
 
@@ -48,11 +47,11 @@
             <geometry>
                 <box size="${box_x} ${box_y} ${box_z}" />
             </geometry>
-            <origin xyz="${box_x/2} 0 ${box_z/2}" />
+            <origin xyz="0 0 ${box_z/2}" />
         </collision>
 
         <xacro:inertial_box mass="${box_mass}" x="${box_x}" y="${box_y}" z="${box_z}">
-            <origin xyz="${box_x/2} 0 ${box_z/2}" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="0 0 0" />
         </xacro:inertial_box>
 
     </link>
@@ -66,14 +65,14 @@
     <joint name="left_wheel_joint" type="continuous">
         <parent link="base_link" />
         <child link="left_wheel_link" />
-        <origin xyz="0 ${W_y} 0" rpy="-${pi/2} 0 0" />
-        <axis xyz="0 0 1" />
+        <origin xyz="-${W_x} ${W_y} -${W_z}" rpy="0 0 ${pi/2}" />
+        <axis xyz="1 0 0" />
     </joint>
 
     <link name="left_wheel_link">
         <visual>
             <geometry>
-                <cylinder radius="${W_D/2}" length="${W_h}" />
+                <mesh filename="file://$(find sevillabot)/meshes/ASSY_Wheel.stl" scale="1.0e-3 1.0e-3 1.0e-3"/>
             </geometry>
             <material name="blue" />
         </visual>
@@ -85,7 +84,7 @@
         </collision>
 
         <xacro:inertial_cylinder mass="${W_mass}" radius="${W_D/2}" length="${W_h}">
-            <origin xyz="0 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
         </xacro:inertial_cylinder>
 
     </link>
@@ -99,14 +98,15 @@
     <joint name="right_wheel_joint" type="continuous">
         <parent link="base_link" />
         <child link="right_wheel_link" />
-        <origin xyz="0 -${W_y} 0" rpy="${pi/2} 0 0" />
-        <axis xyz="0 0 -1" />
+        <origin xyz="-${W_x} -${W_y} -${W_z}" rpy="0 0 -${pi/2}" />
+        <axis xyz="-1 0 0" />
     </joint>
 
     <link name="right_wheel_link">
         <visual>
             <geometry>
-                <cylinder radius="${W_D/2}" length="${W_h}" />
+                <!-- cylinder radius="${W_D/2}" length="${W_h}" / -->
+                <mesh filename="file://$(find sevillabot)/meshes/ASSY_Wheel.stl" scale="1.0e-3 1.0e-3 1.0e-3"/>
             </geometry>
             <material name="blue" />
         </visual>
@@ -118,7 +118,7 @@
         </collision>
 
         <xacro:inertial_cylinder mass="${W_mass}" radius="${W_D/2}" length="${W_h}">
-            <origin xyz="0 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}" />
         </xacro:inertial_cylinder>
 
     </link>
@@ -132,18 +132,21 @@
     <joint name="caster_wheel_joint" type="fixed">
         <parent link="chassis_link" />
         <child link="caster_wheel_link" />
-        <origin xyz="${box_x-c_x} 0 ${-c_z}" />
+        <origin xyz="${c_x_off} 0 ${-c_z_off}" rpy = "0 0 0"  />
     </joint>
 
     <link name="caster_wheel_link">
         <visual>
             <geometry>
-                <sphere radius="${c_D/2}" />
+                <!-- sphere radius="${c_D/2}" / -->
+                <mesh filename="file://$(find sevillabot)/meshes/ADDON_caster_wheel.stl" scale="1.0e-3 1.0e-3 1.0e-3"/>
             </geometry>
+            <origin xyz="0 0 0" rpy = "0 0 0"  />
             <material name="yellow" />
         </visual>
 
         <collision>
+            <origin xyz="0 0 0" rpy="0 0 0" />
             <geometry>
                 <sphere radius="${c_D/2}" />
             </geometry>

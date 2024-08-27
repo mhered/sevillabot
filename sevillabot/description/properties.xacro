@@ -5,21 +5,25 @@
     <xacro:property name="box_x" value="0.26"/> <!-- box length in m -->
     <xacro:property name="box_y" value="0.22"/> <!-- box width in m -->
     <xacro:property name="box_z" value="0.075"/> <!-- box height in m -->
-    <xacro:property name="box_mass" value="0.05"/> <!-- box mass in Kg -->
+    <xacro:property name="box_x_off" value="0.0"/> <!-- box x-offset in m -->
+    <xacro:property name="box_z_off" value="0.0"/> <!-- box z-offset in m -->
+    <xacro:property name="box_mass" value="1.7578"/> <!-- box mass in Kg -->
 
     <!-- wheels -->
-    <xacro:property name="W_x" value="0.0"/> <!-- wheel axis x-offset from centre in m -->
-    <xacro:property name="W_z" value="0.022"/> <!-- wheel axis z-offset from bottom in m -->
-    <xacro:property name="W_y" value="0.122"/> <!-- wheel half separation in m -->
+    <xacro:property name="W_x" value="0.04"/> <!-- wheel axis x-offset from centre in m -->
+    <xacro:property name="W_z" value="0.025"/> <!-- wheel axis z-offset from bottom in m -->
+    <xacro:property name="W_y" value="0.102"/> <!-- wheel half separation in m -->
     <xacro:property name="W_D" value="0.065"/> <!-- wheel diameter in m -->
     <xacro:property name="W_h" value="0.026"/> <!-- wheel width in m -->
-    <xacro:property name="W_mass" value="0.05"/> <!-- wheel mass in Kg -->
+    <xacro:property name="W_mass" value="0.0454"/> <!-- wheel mass in Kg -->
 
-    <!-- casters -->
-    <xacro:property name="c_x" value="0.024"/> <!-- caster centre x-offset from edge in m -->
-    <xacro:property name="c_z" value="0.04"/> <!-- caster contact z-offset from bottom in m -->
+    <!-- caster -->
+    <xacro:property name="c_x" value="0.030"/> <!-- caster centre x-offset from edge in m -->
+    <xacro:property name="c_z" value="0.056"/> <!-- caster contact z-offset from bottom in m -->
+    <xacro:property name="c_x_off" value="0.090"/> <!-- caster mesh x-offset in m -->
+    <xacro:property name="c_z_off" value="0.043"/> <!-- caster mesh z-offset in m -->
     <xacro:property name="c_D" value="0.016"/> <!-- caster diameter in m -->
-    <xacro:property name="c_mass" value="0.05"/> <!-- caster mass in Kg -->
+    <xacro:property name="c_mass" value="0.0471"/> <!-- caster mass in Kg -->
 
     <!-- motors -->
     <xacro:property name="m_y" value="0.04"/> <!-- motor y-offset from centre in m -->
@@ -30,19 +34,21 @@
     <xacro:property name="m_mass" value="0.05"/> <!-- motor mass in Kg -->
 
     <!--lidar -->
-    <xacro:property name="L_x" value="0.16"/> <!-- Lidar x-offset from box centre in m -->
-    <xacro:property name="L_z" value="-0.055"/> <!-- Lidar z-offset from box top in m -->
+    <xacro:property name="L_x" value="0.109"/> <!-- Lidar x-offset in m -->
+    <xacro:property name="L_z" value="-0.004"/> <!-- Lidar z-offset in m -->
+    <xacro:property name="L_x_off" value="0.04"/> <!-- Lidar x-offset in m -->
+    <xacro:property name="L_z_off" value="0.022"/> <!-- Lidar z-offset in m -->
     <xacro:property name="L_D" value="0.038"/> <!-- Lidar head diameter in m -->
     <xacro:property name="L_h" value="0.013"/> <!-- Lidar unit height in m -->
-    <xacro:property name="L_mass" value="0.0042"/> <!-- Lidar mass in Kg -->
-
+    <xacro:property name="L_mass" value="0.0715"/> <!-- Lidar mass in Kg -->
+    
     <!--camera -->
-    <xacro:property name="cam_x" value="0.0"/> <!-- Camera x-offset from box front face in m -->
-    <xacro:property name="cam_z" value="-0.04"/> <!-- Camera z-offset from box top in m -->
+    <xacro:property name="cam_x" value="0.127"/> <!-- Camera x-offset in m -->
+    <xacro:property name="cam_z" value="0.05216"/> <!-- Camera z-offset in m -->
     <xacro:property name="cam_angle" value="${10*pi/180}"/> <!-- Camera down angle in radians -->
-    <xacro:property name="cam_dx" value="0.01"/> <!-- Camera box thickness in m -->
-    <xacro:property name="cam_dy" value="0.04"/> <!-- Camera box width in m -->
-    <xacro:property name="cam_dz" value="0.03"/> <!-- Camera box height in m -->
+    <xacro:property name="cam_dx" value="0.006"/> <!-- Camera box thickness in m -->
+    <xacro:property name="cam_dy" value="0.03"/> <!-- Camera box width in m -->
+    <xacro:property name="cam_dz" value="0.02"/> <!-- Camera box height in m -->
     <xacro:property name="cam_mass" value="0.002"/> <!-- Camera mass in Kg -->
 
 
