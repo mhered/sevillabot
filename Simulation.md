@@ -80,7 +80,7 @@ Note: need to scale when importing (FreeCAD units are mm, Gazebo units are m)
 * Added default RVIZ config `display_bot.rviz`
 * In `camera.xacro` modify horizontal FOV to 160 degrees. Since camera is small, remove <collision> and <inertial> tags. 
 * Update `Camera.md` with camera properties
-* in `Simulation.md` add notes for all changes above
+* in `Simulation.md` add notes for teleop with joystick and all changes above
 
 ## To Do
 
