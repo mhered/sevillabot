@@ -1,6 +1,8 @@
 # Simulation
 
-Spawn the robot
+## Quick start
+
+1. Spawn the robot
 
 
 ```bash
@@ -9,7 +11,7 @@ $ source install/setup.bash
 $ ros2 launch sevillabot rsp.launch.py use_sim_time:=true
 ```
 
-Launch gazebo
+2. Launch gazebo
 
 ```bash
 $ cd ~/dev_ws/
@@ -19,15 +21,7 @@ $ ros2 launch sevillabot launch_sim.launch.py
 
 <img src="./assets/sevillabot_in_Gazebo.png" style="zoom: 33%;" />
 
-Teleop with keyboard
-
-```bash
-$ cd ~/dev_ws/
-$ source install/setup.bash
-$ ros2 run teleop_twist_keyboard teleop_twist_keyboard
-```
-
-Display in RVIZ
+3. Display in RVIZ
 
 ```bash
 $ cd ~/dev_ws/
@@ -36,6 +30,22 @@ $ ros2 launch sevillabot display.launch.py
 ```
 
 <img src="./assets/sevillabot_in_RVIZ.png" style="zoom: 33%;" />
+
+4. Teleop with keyboard
+
+```bash
+$ cd ~/dev_ws/
+$ source install/setup.bash
+$ ros2 run teleop_twist_keyboard teleop_twist_keyboard
+```
+
+or,  Teleop with gamepad (plugged to PC)
+
+```bash
+$ cd ~/dev_ws/
+$ source install/setup.bash
+$ ros2 launch sevillabot joystick.launch.py
+```
 
 ## Exporting a FreeCAD assembly to STL
 
@@ -62,6 +72,15 @@ Note: need to scale when importing (FreeCAD units are mm, Gazebo units are m)
 ```xml
 <mesh filename="file://$(find sevillabot)/meshes/ASSY_sevillabot_base.stl" scale="1.0e-3 1.0e-3 1.0e-3"/>
 ```
+
+## Fine tuning
+
+* In `properties.xacro` fix `W_z` (wheel axis z-offset in m) = 0.02 (not 0.025, otherwise wheels are out of their axes!) Checked it matches FreeCAD reference frame displacement.
+* modified `launch_sim.launch.py`to load `sevillabot_world.world` as default world for gazebo simulation
+* Added default RVIZ config `display_bot.rviz`
+* In `camera.xacro` modify horizontal FOV to 160 degrees. Since camera is small, remove <collision> and <inertial> tags. 
+* Update `Camera.md` with camera properties
+* in `Simulation.md` add notes for all changes above
 
 ## To Do
 

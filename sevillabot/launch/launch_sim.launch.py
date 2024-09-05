@@ -40,12 +40,19 @@ def generate_launch_description():
     gazebo_params_path = os.path.join(
         get_package_share_directory(package_name),'config','gazebo_params.yaml')
     
+
+    # Specify the path to your Gazebo world file
+    world_path = os.path.join(
+        get_package_share_directory(package_name), 'worlds', 'sevillabot_world.world')  # Change this to your world file
+
     gazebo_launch_file_path = os.path.join(
         get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')
 
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([gazebo_launch_file_path]),
-                    launch_arguments={'extra_gazebo_args': '--ros-args --params-file ' + gazebo_params_path }.items()
+                    launch_arguments={
+                                    'world': world_path,  # Pass the world argument
+                                    'extra_gazebo_args': '--ros-args --params-file ' + gazebo_params_path }.items()
     )
 
     #  spawner node from the gazebo_ros package. 

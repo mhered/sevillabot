@@ -11,7 +11,7 @@
 
     <!-- wheels -->
     <xacro:property name="W_x" value="0.04"/> <!-- wheel axis x-offset from centre in m -->
-    <xacro:property name="W_z" value="0.025"/> <!-- wheel axis z-offset from bottom in m -->
+    <xacro:property name="W_z" value="0.02"/> <!-- wheel axis z-offset from bottom in m -->
     <xacro:property name="W_y" value="0.102"/> <!-- wheel half separation in m -->
     <xacro:property name="W_D" value="0.065"/> <!-- wheel diameter in m -->
     <xacro:property name="W_h" value="0.026"/> <!-- wheel width in m -->
