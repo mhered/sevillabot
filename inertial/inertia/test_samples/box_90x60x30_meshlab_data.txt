@@ -1,0 +1,55 @@
+Opened mesh /home/mhered/bumperbot_ws/inertial/assets/box_90x60x30.stl in 9 msec
+
+All files opened in 3306 msec
+
+
+Selected new Mesh 0
+
+
+Mesh Bounding Box Size 90.000000 60.000000 30.000000
+
+Mesh Bounding Box Diag 112.249725 
+
+Mesh Bounding Box min -45.000000 -30.000000 -15.000000
+
+Mesh Bounding Box max 45.000000 30.000000 15.000000
+
+Mesh Surface Area is 19800.000000
+
+Mesh Total Len of 18 Edges is 1260.233887 Avg Len 70.012993
+
+Mesh Total Len of 18 Edges is 1260.233887 Avg Len 70.012993 (including faux edges))
+
+Thin shell (faces) barycenter: 0.000000 0.000000 0.000000
+
+Vertices barycenter 0.000000 0.000000 0.000000
+
+Mesh Volume is 162000.000000
+
+Center of Mass is 0.000000 0.000000 0.000000
+
+Inertia Tensor is :
+
+| 60750000.000000 0.000000 0.000000 |
+
+| 0.000000 121500000.000000 0.000000 |
+
+| 0.000000 0.000000 157950000.000000 |
+
+Principal axes are :
+
+| 1.000000 0.000000 0.000000 |
+
+| 0.000000 1.000000 0.000000 |
+
+| 0.000000 0.000000 1.000000 |
+
+axis momenta are :
+
+| 60750000.000000 121500000.000000 157950000.000000 |
+
+Applied filter Compute Geometric Measures in 12 msec
+
+
+
+

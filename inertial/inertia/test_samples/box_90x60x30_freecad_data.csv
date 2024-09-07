@@ -1,0 +1,49 @@
+Information of element
+________________________
+02/09/2024 18:33:18
+Document name	Unnamed1
+Label of the object	Body
+Internal name of the object	Body
+Element name
+Object Type (Shape)	Solid
+Object Type	Part::TopoShape
+Mouse coordinates	X	0	mm	Y	0	mm	Z	0	mm
+Color on selection
+Red	0	Green	0	Blue	0	Transparency	0
+Object Color (float) 	Red	0.8	Green	0.8	Blue	0.8	Transparency	0
+Object Color (int  ) 	Red	204	Green	204	Blue	204	Transparency	0
+Object Color (float) 	Red	0.0980392	Green	0.0980392	Blue	0.0980392	Transparency	0
+Color Line(s) (int  ) 	Red	25	Green	25	Blue	25	Transparency	0
+Color Point(s) (float) 	Red	0.0980392	Green	0.0980392	Blue	0.0980392	Transparency	0
+Color Point(s) (int  ) 	Red	25	Green	25	Blue	25	Transparency	0
+Length of the object	0	mm
+Shape Perimeter	720	mm
+
+Plane	 XY:	0	 coordinates:	[,0.0 , 0.0,]  [,0.0 , 0.0,]
+Plane	 YZ:	0	 coordinates:	[,0.0 , 0.0,]  [,0.0 , 0.0,]
+Plane	 ZX:	0	 coordinates:	[,0.0 , 0.0,]  [,0.0 , 0.0,]
+Shape area	19800	mm2
+Face area	0	mm2
+Volume of the form	162000	mm3
+Mass	1718.82	g	 Density:	10.61
+Shape center	 X:	0	mm	 Y:	0	mm	 Z:	0	mm
+Center of mass	 X:	0	mm	 Y:	0	mm	 Z:	0	mm
+Overall dimensions	 X:	90	mm	 Y:	60	mm	 Z:	30	mm
+Diagonal dimensions	112.25	mm
+Direction	 X:	0	 Y:	0	 Z:	30
+
+Matrix of inertia	mm^5
+ X:	60750000	 Y:	0	 Z:	0	 :	0
+ X:	0	 Y:	121500000	 Z:	0	 :	0
+ X:	0	 Y:	0	 Z:	157950000	 :	0
+ X:	0	 Y:	0	 Z:	0	 :	1
+Matrix inertia massique	gmm2
+ X:	644558	 Y:	0	 Z:	0
+ X:	0	 Y:	1289115	 Z:	0
+ X:	0	 Y:	0	 Z:	1.67585e+06
+Matrix Determinant	1.16585e+24
+Decimal Determinant	1.16585e+24
+Material
+Name	Density	Volume	Unit	Price (kg/dm3)	Total cost	Devise	Info
+Liquid Water (H2o)	1	162000	mm3	10	17.1882	 Eu	adapt Price
+End 	Unnamed1	Body
