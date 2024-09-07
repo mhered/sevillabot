@@ -57,7 +57,7 @@ Workaround (see https://github.com/FreeCAD/FreeCAD/issues/12278):
 3. Create a Mesh from the Part
 4. Export those meshes as STL
 
-To maintain local origin, copy the Part to root axes then export this copy of the part
+To maintain local origin, copy the Part to root axes then export this copy of the part.
 
 Issue: cannot export to DAE format (missing pycollada error message)
 
