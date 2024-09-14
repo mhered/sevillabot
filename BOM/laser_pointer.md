@@ -10,3 +10,16 @@
 6. Output Power: Min 2.5mW, Typical 3.0mW, Max 5.0mW.
 7. Working current: Min 10mA, Typical 20mA, Max 25mA.
 8. Focus can be adjusted with help of lens ring head.
+
+
+
+
+
+## 3D printed parts
+
+* Laser pointer holder
+
+https://grabcad.com/library/nerf-laserpointer-2-0-1
+
+
+

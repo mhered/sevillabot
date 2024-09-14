@@ -20,3 +20,6 @@ Then we did a proper review of the options and the Stryfe appears to be the best
 | ![](./assets/nerf_2_ultra.jpg)   | Nerf Ultra 2                  | E79214R00   | 7.9 x 36.8 x 24.1 cm | 490g (probably not including batteries)<br />6 AA batteries ~140g | 34.98€ | Easier to automate: keep lower trigger pressed continuously and actuate the top one with a 12V standard car door actuator. However there are bad reviews due to inaccurate Ultra darts and frequent clogging. |
 | ![](./assets/nerf_stryfe.jpg)    | Nerf Modulus Stryfe           | C3583F03    | 7.3 x 25.7 x 42.2 cm | 930g (?? Possibly including attachments)<br/>4 AA batteries ~100g | 42.07€ | Easy to automate, same as the Ultra 2. Pricier but has better reviews. Heavier? Check dimensions... |
 
+## 3D parts
+
+* Nerf rail: https://grabcad.com/library/nerf-rail-modelled-after-a-stryfe-1 (not used)

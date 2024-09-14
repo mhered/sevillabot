@@ -188,7 +188,7 @@ Another tutorial: https://www.instructables.com/PID-Based-Line-Following-Robot-W
 
 A great video on PID: https://www.youtube.com/watch?v=4Y7zG48uHRo
 
-## Cad model
+## 3D model
 
 SLDPRT downloaded from grabcad: https://grabcad.com/library/qtr8a-sensor-pololu-1 , converted with On Shape
 
