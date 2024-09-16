@@ -4,14 +4,14 @@
 
 ### Custom messages
 
-1. Create a /msg folder and declare custom message TimestampedData.msg
+1. Create a `/msg` folder and declare custom message `TimestampedData.msg`
 
 ```
 int64 timestamp
 int32 data
 ```
 
-2. modify CMakeLists.txt:
+2. modify `CMakeLists.txt`:
 
 ```python
 ...
@@ -29,7 +29,7 @@ ament_export_dependencies(rosidl_default_runtime)
 ...
 ```
 
-3. modify package.xml
+3. modify `package.xml`
 
 ```xml
   <buildtool_depend>rosidl_default_generators</buildtool_depend>
@@ -200,7 +200,7 @@ line_follower_controller:
 ```bash
 $ . activate_bot.bash # spawn bot
 $ . miniterm.bash # launch miniterm
-$ . line_sensor.bash # launch line_sensor subscriber. Close miniterrm to activate it
+$ . line_sensor.bash # launch line_sensor subscriber. Close miniterm to activate it
 $ . pid.bash # launch PID to start moving
 ```
 
@@ -211,4 +211,4 @@ $ . pid.bash # launch PID to start moving
 - [ ] Understand and fix why the `line_follower_publisher.py` node only works when launched from vs_code terminal (??) -> Seems related to serial communication. Opening and closing miniterm seems to work as well.
 - [x] modify `pid_node.py` to read PID constants and linear speed from `line_follower_pid.yaml` -> this will simplify fine tuning Done 11/04/24
 - [x] integrate gamepad and twist_mux in the robot launch file `launch_robot.launch.py` -> this will simplify launching! DONE 13/04/24
-- [ ] maybe try to integrate also line_follower_publisher.py and pid.py in a `launch_follower.launch.py`, this will simplify launching, and may fix the issue with serial!
+- [ ] maybe try to integrate also `line_follower_publisher.py` and `pid.py` in a `launch_follower.launch.py`, this will simplify launching, and may fix the issue with serial!

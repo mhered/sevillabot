@@ -10,6 +10,8 @@ This is the repo for the team **sevillabot** of PiWars 2024 competition:
 * [Gamepad Controls](./gamepad_controls.md)
 * [SLAM and Navigation](./SLAM_and_Navigation.md)
 * [Line Follower](./Line_follower.md)
+* [Simulation in gazebo](Simulation.md)
 * [Inertia Properties](./inertial/Inertial.md) and [Center of Mass](./inertial/Weighing.md) estimation
+* [Troubleshooting](Troubleshooting.md)
 
 Check out our [blog](https://sevillabot.blog).

@@ -88,6 +88,6 @@ Note: need to scale when importing (FreeCAD units are mm, Gazebo units are m)
 - [x] add caster mesh
 - [x] align height of caster
 - [x] measure and correct position of wheels
-- [ ] is collision between wheels and chassis a problem?
-- [ ] adjust angle of lidar
-- [ ] measure and correct CoGs, masses, inertias
+- [x] is collision between wheels and chassis a problem? Apparently not
+- [x] adjust angle of lidar
+- [ ] measure values of CoGs, masses, inertias and update in URDF

@@ -143,7 +143,7 @@ There are three ways to compete in this challenge (The points available are weig
 
 * **Fully autonomous**: The team has 1' to calibrate the vision system then can only press start and stop.
 * **Blind remote control**: Teleoperated via sensora on the robot and a screen for the driver.
-* **Call and response**: With a team looking at the maze and giving instructions to a driver who cannot see the maze
+* **Call and response**: With a team member looking at the maze and giving instructions to a driver who cannot see the maze
 
 ### Our thoughts
 
