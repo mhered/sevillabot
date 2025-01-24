@@ -13,5 +13,10 @@ This is the repo for the team **sevillabot** of PiWars 2024 competition:
 * [Simulation in gazebo](Simulation.md)
 * [Inertia Properties](./inertial/Inertial.md) and [Center of Mass](./inertial/Weighing.md) estimation
 * [Troubleshooting](Troubleshooting.md)
+* [WIP](./WIP/) (some unfinished projects with improvements for next version of sevillabot):
+  * [Menu](./WIP/menu/README.md): Adding an onboard interface
+  * [RPi_zero](./WIP/RPi_zero/): moving from the RPi 4B to the RPi Zero 2 W
+  * [IMU](./WIP/IMU/README.md): adding an IMU
+
 
 Check out our [blog](https://sevillabot.blog).
