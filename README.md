@@ -17,6 +17,7 @@ This is the repo for the team **sevillabot** of PiWars 2024 competition:
   * [Menu](./WIP/menu/README.md): Adding an onboard interface
   * [RPi_zero](./WIP/RPi_zero/): moving from the RPi 4B to the RPi Zero 2 W
   * [IMU](./WIP/IMU/README.md): adding an IMU
-
+* [Where are the large and private files?](./BKP_sevillabot/README.md)
 
 Check out our [blog](https://sevillabot.blog).
+

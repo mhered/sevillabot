@@ -1,8 +1,6 @@
-secrets.md
-piwars_flights.md
-CAD/
-SD_images/
-firmware_update/
+# ignore folder of large and private files except the README.md
+BKP_sevillabot/*
+!BKP_sevillabot/README.md
 
 .vscode/
 __pycache__/
