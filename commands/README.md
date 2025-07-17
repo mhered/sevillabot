@@ -5,7 +5,7 @@ Open a terminal in this folder and launch commands.
 
 Each command opens a separate terminal.
 
-Warning: this assumes the IP address of the robot has been already named `sevillabot`, see [Troubleshooting.md](./Troubleshooting.md) 
+Warning: this assumes the IP address of the robot has been already named `sevillabot`, see [Troubleshooting.md](../Troubleshooting.md) 
 
 
 ## Shortcuts for frequent remote commands in bot
