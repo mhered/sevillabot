@@ -78,3 +78,11 @@ Note `arp` is a dependency of this python script, may need to install it with:
 $ sudo apt install arp-scan
 ```
 
+## Checking IP addres of robot
+
+Another way is to go to the router:
+![](./assets/router.png)
+
+Go to **Devices** and search for the robot by name or MAC, note down its IP address.
+
+![](./assets/Devices.png)
