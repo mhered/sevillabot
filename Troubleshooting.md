@@ -59,3 +59,22 @@ $ ssh-keygen -f "/home/mhered/.ssh/known_hosts" -R "192.168.8.179"
 Original contents retained as /home/mhered/.ssh/known_hosts.old
 ```
 
+## Scanning for the IP address of `sevillabot`
+
+Easier than connecting the robot to keyboard and screen, assumes MAC address of RPi has not changed (should not unless RPi was replaced or intentionally hacked).
+
+Execute script:
+
+```bash
+$ python3 ./commands/find_lost_robot.py
+Scanning network for sevillabot...
+[sudo] password for mhered: 
+✅ Found sevillabot at IP: 192.168.8.179
+```
+
+Note `arp` is a dependency of this python script, may need to install it with:
+
+```bash
+$ sudo apt install arp-scan
+```
+
